@@ -36,16 +36,15 @@ complib: $(COMPLIB)  $(CURDIR)/Depends
 # Set the THREADDIR for the shared build 
 # based on the threaded build status
 compile_threaded = false
+THREADDIR = nothreads
 ifeq ($(strip $(SMP)),TRUE)
    compile_threaded = true
    THREADDIR = threads
 else
    ifeq ($(strip $(BUILD_THREADED)),TRUE)
-      compile_threaded = true
-      THREADDIR = threads
-   else
-      THREADDIR = nothreads
-   endif
+     compile_threaded = true
+     THREADDIR = threads
+  endif
 endif
 
 # set the debug directory based on the debug status
@@ -443,13 +442,17 @@ $(MCT_LIBDIR)/Makefile.conf:
 	@echo "SHAREDLIBROOT |$(SHAREDLIBROOT)| SHAREDPATH |$(SHAREDPATH)|"; \
 	$(CONFIG_SHELL) $(CIMEROOT)/externals/mct/configure $(CONFIG_ARGS) --srcdir $(CIMEROOT)/externals/mct
 
+$(MCT_LIBDIR)/mpi-serial/Makefile.conf: 
+	@echo "SHAREDLIBROOT |$(SHAREDLIBROOT)| SHAREDPATH |$(SHAREDPATH)|"; \
+	$(CONFIG_SHELL) $(CIMEROOT)/externals/mct/mpi-serial/configure $(CONFIG_ARGS) --srcdir $(CIMEROOT)/externals/mct/mpi-serial
+
 $(MCT_LIBDIR)/mpeu/libmpeu.a: $(MCT_LIBDIR)/Makefile.conf
 	$(MAKE) -C $(MCT_LIBDIR)/mpeu
 
 $(MCT_LIBDIR)/mct/libmct.a: $(MCT_LIBDIR)/mpeu/libmpeu.a
 	$(MAKE) -C $(MCT_LIBDIR)/mct
 
-$(MCT_LIBDIR)/mpi-serial/libmpi-serial.a: $(MCT_LIBDIR)/Makefile.conf
+$(MCT_LIBDIR)/mpi-serial/libmpi-serial.a: $(MCT_LIBDIR)/mpi-serial/Makefile.conf
 	$(MAKE) -C $(MCT_LIBDIR)/mpi-serial; \
 
 ifneq ("$(wildcard $(CIMEROOT)/externals/pio/src)", "")
