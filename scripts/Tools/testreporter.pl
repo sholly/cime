@@ -55,7 +55,7 @@ my $password = undef;
 # and send the results. 
 #-------------------------------------------------------------------------------
 opts();
-authenticate();
+#authenticate();
 
 my @testdirs;
 my %suiteinfo;
@@ -69,8 +69,8 @@ my $xfailelems = getExpectedFails();
 &Debug( eval { Dumper $teststatus} );
 &Debug( eval { Dumper \%suiteinfo } );
 my $testxml = &makeResultsXml($teststatus, \%suiteinfo, $nlfailreport);
-&sendresults(\%teststatus, \%suiteinfo, $testxml);
-&printreport($teststatus, $nlfailreport) if $printreport;
+#&sendresults(\%teststatus, \%suiteinfo, $testxml);
+#&printreport($teststatus, $nlfailreport) if $printreport;
 
 #-------------------------------------------------------------------------------
 # End Main
@@ -279,244 +279,258 @@ sub getTestStatus
     # Iterate through each of the test directories, and get the requisite test information. 
     foreach my $testcase(@$testdirs)
     {
-	# Get the test status 
-	&Debug("testcase $testcase");
-	my $testbaseid = $testcase;
-	$testbaseid =~ s/$testid//g;
-	$testbaseid =~ s/\.G\.//g;
-	$testbaseid =~ s/\.C\.//g;
-	$testbaseid =~ s/\.GC\.//g;
-	&Debug("testbaseid $testbaseid");
-	
-	my $statusfile = $testroot  . "/"  . $testcase .  "/" . $teststatusfilename; 
-	if( ! -e $statusfile)
-	{
-	    warn("$statusfile does not exist, skipping to next test.");
-	    $teststatushash{$testcase}{'status'} = "TFAIL";
-	    $tetstatushash{$testcase}{'comment'} = "TestStatus file could not be found!";
-	    next;
-	}
-	&Debug( "Status file: $statusfile\n");
-	open (my $teststatusfile, "<", $statusfile) or die "cannot open TestStatus file for $testcase, $!";
-	my $teststatus = <$teststatusfile>;
-	chomp $teststatus;
-	#my $lotsacasestatus = $teststatus;
-	my $statusline = $teststatus;
-	$teststatus = (split(/\s+/, $teststatus))[0];
-	&Debug("Testcase:   $testcase\n");
-	&Debug( "Teststatus: $teststatus\n"); 
-	
-	my $xfailbugz;
-	my $xfailnode;
-	
-	#print Dumper $xfailelems;
-	#print "statusline: $statusline\n";
-	foreach my $xfailelem(@$xfailelems)
-	{
-		my $xfailentry = $xfailelem->textContent();
-		#print "xfailentry $xfailentry\n";
-		#my $bugz = $xfailnode->getAttribute('bugz');
-		my $bugz = undef;
-		if($xfailelem->hasAttribute('bugz'))
-		{
-			$bugz = $xfailelem->getAttribute('bugz');
-		}
-		$xfailentry =~ m/(\w+\s)(.+$)/;
-		#print "xfailentry $xfailentry\n";
-		my $xfailinfo = $2;
-		#print "xfailinfo: $xfailinfo\n";
-		#print "statusline: $statusline\n";
-		chomp($status_info);
-		#if(($statusline =~ m/(^$xfailinfo)(\..*$)/) ||
-        #    $xfailinfo eq $status_info)
-		if(($xfailinfo =~ /$testbaseid/) ||
-            $xfailinfo eq $status_info)
-		{
-			&Debug( "match found!");
-			&Debug( "xfailinfo: $xfailinfo");
-			&Debug( "statusline: $statusline");
-			if($teststatus =~ m/DONE/)
-			{
-				$teststatus = 'U' . $teststatus;
-			}
-			if($teststatus =~ m/PASS/)
-			{
-				$teststatus = 'U' . $teststatus;
-			}
-
-			if($teststatus =~ m/(FAIL|RUN)/)
-			{
-				if($bugz)
-				{
-					$teststatus = 'KT' . $teststatus . "(bugzilla $bugz)";
-				}
-				else
-				{
-					$teststatus = 'KT' . $teststatus ;
-				}
-			}
-			&Debug( "teststatus $teststatus");
-		}
-	
-	}
-	$teststatushash{$testcase}{'status'} = $teststatus;
-
-	# Now go through the TestStats getting the memleak, compare, baseline tag, throughput, and comments if any. 
-	my @statuslines = <$teststatusfile>;
-	chomp @statuslines;
-	#my $lotsacasestatus = join( "\n", @statuslines);
-	#print "lotsacasestatus\n";
-	#print "$lotsacasestatus\n";
-
-	# Get the baseline compare summary
-	#my @comparelines = grep { /compare_hist/} @statuslines;
-	my @comparelines = grep { /baseline compare summary/} @statuslines;
-	my ($comparestatus,$comparetest)  = split(/\s+/, $comparelines[0]);
-	$teststatushash{$testcase}{'compare'} = $comparestatus;
-	my $comparetag = (split(/\./, $comparetest))[-1];
-	$baselinetag = $comparetag unless defined $baselinetag;
-
-	
-        # If this a normal test, ie NOT a set of SBN tests, then 
-        # send the following fields. If this is a namelist test, then skip these fields, they
-        # will never be filled in for SBN tests. 
-        if($testtype ne 'namelist') 
-	{
-	    my @memleaklines = grep { /memleak/ } @statuslines;
-	    my $memleakstatus = (split(/\s+/, $memleaklines[0]))[0];
-	    $teststatushash{$testcase}{'memleak'} = $memleakstatus;
-
-	    my @memcomplines = grep { /memcomp/} @statuslines;
-	    my $memcompstatus = (split(/\s+/, $memcomplines[0]))[0];
-	    $teststatushash{$testcase}{'memcomp'} = $memcompstatus;
-
-	    my @tputcomplines = grep { /tputcomp/ } @statuslines;
-	    my $tputcompstatus = (split(/\s+/, $tputcomplines[0]))[0];
-	    $teststatushash{$testcase}{'tputcomp'} = $tputcompstatus;
-	}
-
-	my @nlcomplines = grep { /nlcomp/i } @statuslines;
-	my $nlcompstatus = (split(/\s+/, $nlcomplines[0]))[0];
-	$teststatushash{$testcase}{'nlcomp'} = $nlcompstatus;
-
-	my @commentlines = grep { /COMMENT/ } @statuslines;
-	my $comment = (split(/\s+/, $commentlines[0], 2) )[1];
-	chomp $comment;
-	#$teststatushash{$testcase}{'comment'} = $lotsacasestatus;
-	$teststatushash{$testcase}{'comment'} = $comment;
-	
-	close $teststatusfile;
-	
-	# Check the CaseStatus, and print out the last line...
-	my $casestatusfile = $testroot . "/"  . $testcase . "/" . $casestatusfilename;
-	if( -e $casestatusfile)
-	{
-	    open (my $casestatusfile, "<", $casestatusfile) or die "cannot open CaseStatusfile for $testcase, $!";
-
-	    my $lastline;
-	    while(<$casestatusfile>)
+	    # Get the test status 
+	    &Debug("testcase $testcase");
+	    my $testbaseid = $testcase;
+	    $testbaseid =~ s/$testid//g;
+	    $testbaseid =~ s/\.G\.//g;
+	    $testbaseid =~ s/\.C\.//g;
+	    $testbaseid =~ s/\.GC\.//g;
+	    &Debug("testbaseid $testbaseid");
+	    
+	    my $statusfile = $testroot  . "/"  . $testcase .  "/" . $teststatusfilename; 
+	    if( ! -e $statusfile)
 	    {
-		$lastline = $_ if eof;
+	        warn("$statusfile does not exist, skipping to next test.");
+	        $teststatushash{$testcase}{'status'} = "TFAIL";
+	        $tetstatushash{$testcase}{'comment'} = "TestStatus file could not be found!";
+	        next;
 	    }
-	    close $casestatusfile;
-	    chomp $lastline;
-	    &Debug ("last line of CaseStatus: $lastline\n");
-	    #$teststatushash{$testcase}{'casestatus'} = $lotsacasestatus;
-	    $teststatushash{$testcase}{'casestatus'} = $lastline;
+	    &Debug( "Status file: $statusfile\n");
+	    open (my $teststatusfile, "<", $statusfile) or die "cannot open TestStatus file for $testcase, $!";
+	    #my $teststatus = <$teststatusfile>;
+	    my @statuslines = <$teststatusfile>;
+	    chomp @statuslines;
+		close $teststatusfile;
+		#chomp $teststatus;
+	    #my $lotsacasestatus = $teststatus;
+	    #my $statusline = $teststatus;
+	    my $statusline = $statuslines[0];;
+		&Debug("Status line: $statusline\n");
+	    #$teststatus = (split(/\s+/, $teststatus))[0];
+	    $teststatus = (split(/\s+/, $statusline))[0];
+	    &Debug("Testcase:   $testcase\n");
+	    &Debug( "Teststatus: $teststatus\n"); 
+	    $teststatushash{$testcase}{'overallstatus'} = $teststatus;
+
+        # Check the CaseStatus, and print out the last line...
+        my $casestatusfile = $testroot . "/"  . $testcase . "/" . $casestatusfilename;
+        if( -e $casestatusfile)
+        {
+            open (my $casestatusfile, "<", $casestatusfile) or die "cannot open CaseStatusfile for $testcase, $!";
+
+            my $lastline;
+            while(<$casestatusfile>)
+            {
+            $lastline = $_ if eof;
+            }
+            close $casestatusfile;
+            chomp $lastline;
+            &Debug ("last line of CaseStatus: $lastline\n");
+            #$teststatushash{$testcase}{'casestatus'} = $lotsacasestatus;
+            $teststatushash{$testcase}{'casestatus'} = $lastline;
+        }
+        else
+        {
+            &Debug("Case status file $casestatus doesn't exist");
+            $teststatushash{$testcase}{'casestatus'} = "NA";
+        }
+
+        # If this a normal test, ie NOT a set of SBN tests, then
+        # send the following fields. If this is a namelist test, then skip these fields, they
+        # will never be filled in for SBN tests.
+        my @memleaklines = grep { /memleak/ } @statuslines;
+	    if(@memleaklines)
+	    {
+            my $memleakstatus = (split(/\s+/, $memleaklines[0]))[0];
+            $teststatushash{$testcase}{'memleak'} = $memleakstatus;
+	    }
+	    else
+	    {
+	    	$teststatushash{$testcase}{'memleak'} = "NA";
+	    }
+
+        my @memcomplines = grep { /memcomp/} @statuslines;
+	    if(@memcomplines)
+	    {
+            my $memcompstatus = (split(/\s+/, $memcomplines[0]))[0];
+            $teststatushash{$testcase}{'memcomp'} = $memcompstatus;
+	    }
+	    else
+	    {
+	    	$teststatushash{$testcase}{'memcomp'} = "NA";
+	    }
+
+        my @tputcomplines = grep { /tputcomp/ } @statuslines;
+	    if(@tputcomplines)
+	    {
+            my $tputcompstatus = (split(/\s+/, $tputcomplines[0]))[0];
+            $teststatushash{$testcase}{'tputcomp'} = $tputcompstatus;
+	    }
+	    else
+	    {
+            $teststatushash{$testcase}{'tputcomp'} = "NA";
+	    }
+	
+		# Get the nlcomp status
+	    my @nlcomplines = grep { /nlcomp/i } @statuslines;
+		if(@nlcomplines)
+		{
+	        my $nlcompstatus = (split(/\s+/, $nlcomplines[0]))[0];
+	        $teststatushash{$testcase}{'nlcomp'} = $nlcompstatus;
+		}
+		else
+		{
+			$teststatushash{$testcase}{'nlcomp'} = "NA";
+		}
+
+		# Get the automated comment 
+	    my @commentlines = grep { /COMMENT/ } @statuslines;
+		if(@commentlines)
+		{
+	        my $comment = (split(/\s+/, $commentlines[0], 2) )[1];
+	        chomp $comment;
+	        $teststatushash{$testcase}{'comment'} = $comment;
+		}
+		else
+		{
+			$teststatushash{$testcase}{'comment'} = "NA";
+		}
+	
+		my @testtimelines = grep { /Test time/ } @statuslines;
+		if(@testtimelines)
+		{
+			my $timeline = $testtimelines[0];
+			$timeline =~ /(\d+)/;
+			$teststatushash{$testcase}{'testtime'} = $1;
+		}
+		else	
+		{
+			$teststatushash{$testcase}{'testtime'} = "NA";
+		}
+
+	    # Get the baseline generate, baseline compare, and history comparison status
+	    # and detail
+	    #print "statuslines: \n";
+		#print Dumper \@statuslines;
+	    my ($baselinegenstatus, $baselinegenlines) = getBaselineGen(\@statuslines);
+	    my ($baselinecompstatus, $baselinecomplines) = getBaselineComp(\@statuslines);
+	    my ($historycompstatus, $historycomplines) = getHistoryComp(\@statuslines);
+	    $teststatushash{$testcase}{'baselinegenstatus'} = $baselinegenstatus;
+	    $teststatushash{$testcase}{'baselinegendetail'} = $baselinegenlines;
+	    $teststatushash{$testcase}{'baselinecompstatus'} = $baselinecompstatus;
+	    $teststatushash{$testcase}{'baselinecompdetail'} = $baselinecomplines;
+	    $teststatushash{$testcase}{'historycompstatus'} = $historycompstatus;
+		$teststatushash{$testcase}{'historycompdetail'} = $historycomplines;
+	}
+	#print Dumper \%teststatushash;
+	#map { print "key: $_\n"} keys %teststatushash;
+	return \%teststatushash;
+
+}
+
+sub getHistoryComp()
+{
+	my $output = shift;
+	
+	my @histcomplines;
+	my $histcompstatus;
+	my $match = 0;
+	# look for 'Test Functionality' lines
+	foreach my $line(@$output)
+	{
+		$match = 1 if($line =~ /Test Functionality/);
+		if($line =~ /Baseline Comparison/)
+		{
+			$match = 0;
+			last;
+		}
+		push(@histcomplines, $line) if $match;
+	}
+
+	my $histpass = 1;
+	my @nclines = grep { /\.nc/ } @histcomplines;
+	&Debug( eval{ Dumper \@nclines});
+	if(@nclines)
+	{
+	    foreach my $ncline(@nclines)
+	    {
+	    	if($ncline !~ /PASS/)
+	    	{
+	    		$histpass = 0;
+	    	}
+	    }
+	    $histcompstatus = "FAIL" if $histpass = 0;
+	    $histcompstatus = "PASS" if $histpass = 1;
+	}
+	else 
+	{
+		$histcompstatus = "NA";
+	}
+	return ($histcompstatus, \@histcomplines);
+}
+
+sub getBaselineComp()
+{
+	my $output = shift;
+	my @baselinecomplines;
+	my $baselinecompstatus;
+	my $match = 0;
+	
+	foreach my $line(@$output)
+	{
+		$match = 1 if ($line =~ /Baseline Comparison/);
+		if($line =~ /Baseline Generation/)
+		{
+            $match = 0;
+			$last;
+		}
+		push(@baselinecomplines, $line) if $match;
+	}
+	
+	my @baselinecompsummary = grep { /baseline compare summary/} @$output;
+	if(@baselinecompsummary)
+	{
+		$baselinecompstatus = (split(/\s+/, $baselinecompsummary[0]))[0];
 	}
 	else
 	{
-	    &Debug("Case status file $casestatus doesn't exist");
-	    $teststatushash{$testcase}{'casestatus'} = "CaseStatus file not found";
+		$baselincompstatus = "NA";
 	}
-
-	# If the test is an IOP test, set a flag in the test status hash indicating it as such.
-	if($testcase =~ /IOP\./)
-	{
-	    $teststatushash{$testcase}{'isioptest'} = "true";
-	}
-
-	# Get the IOP test status if the file exists.   
-	# If so, create separate iop* entries in the teststatus hash for this test.  
-	my $iopstatusfile = $testroot . "/" . $testcase . "/" . $iopstatusfilename;
-	if( -e $iopstatusfile)
-	{
-	    open (my $iopfh, "<", $iopstatusfile) or die " cannot open IOP status file for $testcase, $!";
-	    my $iopstatus = <$iopfh>;
-	    chomp $iopstatus;
-	    $iopstatus = (split(/\s+/, $iopstatus))[0];
-	    $teststatushash{$testcase}{'iopstatus'} = $iopstatus;
-	    @statuslines = <$iopstatusfile>;
-	    
-	    @memleaklines = grep { /memleak/ } @statuslines;
-	    $memleakstatus = (split(/\s+/, $memleaklines[0]))[0];
-	    $teststatushash{$testcase}{'iopmemleak'} = $memleakstatus;
-
-	    @comparelines = grep { /compare_hist/} @statuslines;
-	    ($comparestatus,$comparetest)  = split(/\s+/, $comparelines[0]);
-	    $teststatushash{$testcase}{'compare'} = $comparestatus;
-	    $comparetag = (split(/\./, $comparetest))[-1];
-	    $teststatushash{$testcase}{'iopbaselinetag'} = $comparetag;
-
-	    @memcomplines = grep { /memcomp/} @statuslines;
-	    $memcompstatus = (split(/\s+/, $memcomplines[0]))[0];
-	    $teststatushash{$testcase}{'iopmemcomp'} = $memcompstatus;
-
-	    @tputcomplines = grep { /tputcomp/ } @statuslines;
-	    $tputcompstatus = (split(/\s+/, $tputcomplines[0]))[0];
-	    $teststatushash{$testcase}{'ioptputcomp'} = $tputcompstatus;
-
-  	    @nlcomplines = grep { /nlcomp/i } @statuslines;
-	    $nlcompstatus = (split(/\s+/, $nlcomplines[0]))[0];
-	    $teststatushash{$testcase}{'iopnlcomp'} = $nlcompstatus;
-
-	    @commentlines = grep { /COMMENT/ } @statuslines;
-	    $comment = (split(/\s+/, $commentlines[0], 2) )[1];
-	    chomp $comment;
-	    $teststatushash{$testcase}{'iopcomment'} = $comment;
-	    
-	    $teststatushash{$testcase}{'iopcasestatus'} = $teststatushash{$testcase}{'casestatus'};
-	    
-	    close $iopfh;
-	}
-
-
-        if($testtype eq 'namelist')
-	{
-	    my $statusoutfile = $testroot  . "/"  . $testcase .  "/" . $teststatusoutfilename;
-            if( -e $statusoutfile  && $teststatushash{$testcase}{'nlcomp'} eq 'FAIL')
-	    {
-		open my $STATUSOUT, "<", $statusoutfile or warn "can't open $statusoutfile, $!";
-		my @statusoutlines = <$STATUSOUT>;	
-		my $commentflag = 0;
-		foreach my $soline(@statusoutlines)
-		{
-		    chomp $soline;
-		    next if ($soline =~ /^$/);
-		    $commentflag = 1 if ($soline =~ /^FAIL/);	
-		    $commentflag = 0 if ($soline =~ /^PASS/);
-		    if($commentflag)
-		    {
-			$teststatushash{$testcase}{'comment'} .= "$soline\n";
-			Debug( eval { Dumper \$teststatushash{$testcase}{'comment'} } );
-		    }
-		}
-		$nlreporthash{$teststatushash{$testcase}{'comment'}}{$testcase} = 1;
-	    }
-	    foreach my $blank(keys %nlreporthash)
-	    {
-		delete $nlreporthash{$blank} if(length $nlreporthash{$blank} == 0);
-	    }
-	}
-    }
-    
-    foreach my $blank(keys %nlreporthash)
-    {
-	delete $nlreporthash{$blank} if(length $nlreporthash{$blank} == 0);
-    }
-    
-    return \%teststatushash, \%nlreporthash;
+	
+	return ($baselinecompstatus, \@baselinecomplines);
 }
+
+sub getBaselineGen()
+{
+	my $output = shift;
+	my @baselinegenlines;
+	my $baselinegenstatus;
+	my $match = 0;
+
+	foreach my $line(@$output)
+	{
+		$match = 1 if ($line =~ /Baseline Generation/);
+		if($line =~ /Test time/i)
+		{
+			$match = 0;
+			last;
+		}	
+		push(@baselinegenlines, $line) if $match;
+	}
+
+	my @baselinegensummary = grep { /baseline generate summary/ } @$output;
+	if(@baselinegensummary)
+	{
+		$baselinegenstatus = (split(/\s+/ ,$baselinegensummary[0] ))[0];
+	}
+	else
+	{
+		$baselinegenstatus = "NA";
+	}
+	return ($baselinegenstatus, \@baselinegenlines);
+}
+	
 
 
 # Send the results as an XML file, using the following DTD:
@@ -549,27 +563,68 @@ sub makeResultsXml
     $root->appendTextChild('testroot', $testroot);
     $root->appendTextChild('testtype', $testtype);
     $root->appendTextChild('baselinetag', $suiteinfo{'baselinetag'});
+	# Create the tests element that each test element will go under. 
+	my $testselement = $testxml->createElement('tests');
 
     foreach my $test(reverse sort keys %$testresults)
     {
-	my $testelem = $testxml->createElement('tests');
-	$testelem->setAttribute('testname', $test);
-	foreach my $detail(sort keys %{$$testresults{$test}})
-	{
-	    my $catelem = $testxml->createElement('category');
-	    $catelem->setAttribute('name', $detail);
-	    if($detail eq 'comment')
+	    my $testelem = $testxml->createElement('test');
+	    $testelem->setAttribute('testname', $test);
+	    foreach my $detail(sort keys %{$$testresults{$test}})
 	    {
-		$cdata = XML::LibXML::CDATASection->new($$testresults{$test}{$detail});
-		$catelem->appendChild($cdata);
+	        my $catelem = $testxml->createElement('category');
+	        $catelem->setAttribute('name', $detail);
+		    if($detail eq 'baselinegendetail')
+			{
+				my $blgenelement = $testxml->createElement('baselinegen');
+				$blgenelement->setAttribute('status', $$testresults{$test}{'baselinegenstatus'});
+                my $blgendetail;
+				map { $blgendetail .= "$_\n"} @{$$testresults{$test}{$detail}};
+		      	$cdata  = XML::LibXML::CDATASection->new($blgendetail);
+				$blgenelement->appendChild($cdata);
+				$testelem->appendChild($blgenelement);
+			}
+			#if($detail eq  'baselinecompdetail' || $detail eq 'baselinegendetail' || $detail eq 'historycompdetail')
+			elsif($detail eq  'baselinecompdetail' )
+			{
+				my $blcompelement = $testxml->createElement('baselinecomp');
+				$blcompelement->setAttribute('status', $$testresults{$test}{'baselinecompstatus'});
+				my $compdetail;
+				map { $compdetail .= "$_\n" } @{$$testresults{$test}{$detail}};
+				my $cdata = XML::LibXML::CDATASection->new($compdetail);
+				$blcompelement->appendChild($cdata);
+				$testelem->appendChild($blcompelement);
+			}
+			elsif($detail eq 'historycompdetail')
+			{
+				my $histcompelement = $testxml->createElement('historycomp');
+				$histcompelement->setAttribute('status', $$testresults{$test}{'historycompstatus'});
+				my $compdetail;
+				map { $compdetail .= "$_\n" } @{$$testresults{$test}{$detail}};
+				my $cdata = XML::LibXML::CDATASection->new($compdetail);
+				$histcompelement->appendChild($cdata);
+				$testelem->appendChild($histcompelement);
+			}
+	        elsif($detail eq 'comment')
+	        {
+				next if($detail =~ /(baselinegen|baselinecomp|historycomp)/);
+	    	    $cdata = XML::LibXML::CDATASection->new($$testresults{$test}{$detail});
+	    	    $catelem->appendChild($cdata);
+	            $testelem->appendChild($catelem);
+	        }
+	        else
+	        {
+				next if($detail =~ /(baselinegen|baselinecomp|historycomp)/);
+	    	    #$testelem->appendText($$testresults{$test}{$detail});
+	    	    $catelem->appendText($$testresults{$test}{$detail});
+				$testelem->appendChild($catelem);
+				#$catelem->appendChild($cdata);
+	            #$testelem->appendChild($catelem);
+	        }
+	        #$testelem->appendChild($catelem);
+			#print Dumper $testelem;
 	    }
-	    else
-	    {
-		$catelem->appendText($$testresults{$test}{$detail});
-	    }
-	    $testelem->appendChild($catelem);
-	}
-	$root->appendChild($testelem);
+	    $testselement->appendChild($testelem);
     }
 
     if($testtype eq 'namelist')
@@ -592,6 +647,7 @@ sub makeResultsXml
 	$root->appendChild($nlfailreportelem);
     }
 
+	$root->appendChild($testselement);
     $testxml->setDocumentElement($root);
     $xmlstring = $testxml->toString(1);
     Debug("testxml file: ");
