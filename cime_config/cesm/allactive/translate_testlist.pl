@@ -2,9 +2,12 @@
 #
 use strict;
 use warnings;
+use diagnostics;
 use XML::LibXML;
 use Data::Dumper;
 {
+    # Just a data class to make it easier to 
+    # parse the xml testlist. 
     package CIMETest;
     sub new
     {
@@ -24,6 +27,9 @@ use Data::Dumper;
         bless $self, $class;
         return $self;
     }
+    
+    # print the old-school test list format. 
+    # 
     sub repr()
     {
         my $self = shift;   
@@ -31,12 +37,14 @@ use Data::Dumper;
         $rep .= $self->{grid} . ".";
         $rep .= $self->{compset} . ".";
         $rep .= $self->{machine} . "_";
-        $rep .= $self->{compiler} ;
+        $rep .= $self->{compiler} . ".";
+        $rep .= $self->{testtype} ;
         $rep .=  "." . $self->{testmods} if defined $self->{testmods};
         return $rep;
     }
 }
 
+# parse the testlist, return a list of CESMTest objects. 
 sub read_testlist()
 {
     my $xmlfile = shift;
@@ -65,7 +73,19 @@ sub read_testlist()
                                         testtype => $testtype);
                     if(defined $testmods) { $tst->{testmods} = $testmods; }
                     if(defined $comment) { $tst->{comment} = $comment; }
-                    push(@tests, $tst);
+    
+                    # compare the string representations to avoid 
+                    # duplication. 
+                    my $dupefound = 0;
+                    foreach my $t(@tests)
+                    {
+                        if($t->repr() eq $tst->repr())
+                        {
+                            $dupefound = 1;
+                            last;
+                        }
+                    }
+                    push(@tests, $tst) if !$dupefound;
                 }
             }
         }
@@ -96,6 +116,8 @@ sub translate_testlist()
         my $name = $test->{testname};
         my $grid = $test->{grid};
         my $compset = $test->{compset};
+        my $machine = $test->{machine};
+        my $category = $test->{category};
         my $testmods = undef;
         $testmods = $test->{testmods} if defined $test->{testmods};
         my @existingnodes; 
@@ -118,18 +140,69 @@ sub translate_testlist()
         {
             $testelement->setAttribute('testmods', $test->{testmods});
         }
+        
         $testlistelement->appendChild($testelement);
+    
     }
     
     my $x = $dom->toString(1);
     print $x . "\n";
     
-    while(@sortedtests)
+    #my @sortedtestscopy = @sortedtests;
+    #while(@sortedtestscopy)
+    my @testnodes = $testlistelement->findnodes("/testlist/test");
+    foreach my $testelement(@testnodes)
     {
-        my $test = shift @sortedtests;
-        print $test->repr() , "\n";
-
+        #my $test = shift @sortedtestscopy;
+        #foreach my $testelement(@testnodes)
+        my @sortedtestscopy = @sortedtests;
+        while(@sortedtestscopy)
+        {
+            my $test = shift @sortedtestscopy;
+            #print "testnode name: ", $testnode->getAttribute('name'), "\n";
+            if(! $testelement->hasChildNodes())
+            {
+                my $machineselement = XML::LibXML::Element->new('machines');
+                my $machineelement = XML::LibXML::Element->new('machine');
+                $machineelement->setAttribute('name', $test->{machine});
+                #$machineelement->setAttribute('mpilib', '!mpi-serial');
+                $machineelement->setAttribute('category', $test->{testtype});
+                $machineelement->setAttribute('compiler', $test->{compiler});
+                $machineselement->appendChild($machineelement);
+                $testelement->appendChild($machineselement);
+                next; 
+            }
+            else
+            {
+                my @existingnodes; 
+                if(defined $test->{testmods})
+                {
+                    print "testmods defined\n";
+                    @existingnodes = $dom->findnodes("/testlist/test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\' and \@testmods=\'$test->{testmods}\']/machines/machine[\@name=\'$test->{machine}\' and \@compiler=\'$test->{compiler}\']");
+                }
+                else
+                {
+                    print "testmods NOT defined\n";
+                    @existingnodes = $dom->findnodes("/testlist/test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\']/machines/machine[\@name=\'$test->{machine}\' and \@compiler=\'$test->{compiler}\']");
+                }
+                print Dumper \@existingnodes;
+                if(@existingnodes)
+                {
+                    my @machinesnodes = $dom->findnodes("/testlist/test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\']/machines");
+                    my $machinesnode = $machinesnodes[0];
+    
+                    my $machineelement = XML::LibXML::Element->new('machine');
+                    $machineelement->setAttribute('name', $test->{machine});
+                    $machineelement->setAttribute('category', $test->{testtype});
+                    $machineelement->setAttribute('compiler', $test->{compiler});
+                    $machinesnode->appendChild($machineelement);
+                }
+            
+            }
+        }
     }
+    $x = $dom->toString(1);
+    print $x . "\n";
 }
 my $tests = &read_testlist( "./testlist_allactive.xml" );
 &translate_testlist($tests);
