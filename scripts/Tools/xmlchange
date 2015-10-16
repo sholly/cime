@@ -195,6 +195,13 @@ foreach my $id ( keys(%idlist) )
 
 	    # Do error checking for requested change
 	    $value = $node->getAttribute('value');
+        # If there are multiple values passed in on the command line, 
+        # these three variables need to be cleared, or multiple values 
+        # on the command line won't work.  
+        $type = undef;
+        $valid_values = undef;
+        $is_list_value = undef;
+        
 	    foreach my $childnode ($node->childNodes()) 
 	    {
 		if ($childnode->nodeName() eq 'type') {
@@ -203,6 +210,7 @@ foreach my $id ( keys(%idlist) )
 		if ($childnode->nodeName() eq 'valid_values') {
 		    $valid_values = $childnode->textContent();
 		}
+        
 		if ($childnode->nodeName() eq 'list') {
 		    $is_list_value = $childnode->textContent();
 		}
