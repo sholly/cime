@@ -191,6 +191,7 @@ sub makeBatchScript()
     $self->setWallTime();
     $self->setProject();
     $self->setBatchDirectives();
+    $self->postBatchDirectives();
     $self->getLtArchiveOptions();
     $self->setCESMRun();
     $self->writeBatchScript($inputfilename, $outputfilename);
@@ -219,7 +220,7 @@ sub getBatchSystemTypeForMachine()
 # Get batch directives, optionally setting up the data needed if not already 
 # done. 
 #==============================================================================
-sub getBatchDirectives()
+sub getTestBatchDirectives()
 {
     my $self = shift;
     
@@ -234,8 +235,8 @@ sub getBatchDirectives()
 	$self->setBatchDirectives();
     }
     return $self->{'batchdirectives'};
-
 }
+
 #==============================================================================
 # Get a particular field of data from the instance data that gets stored 
 # in this object.  There should really be a separate BatchData class, but
@@ -346,6 +347,11 @@ sub setBatchDirectives()
 	    $self->{'batchdirectives'} .= $directiveLine . "\n";
 	}
     }		
+}
+
+sub postBatchDirectives()
+{
+    my $self = shift;
 }
 
 #==============================================================================
@@ -874,6 +880,14 @@ sub _test()
     return 1;
 }
 
+sub setBatchDirectives()
+{
+	my $self = shift;
+	$self->SUPER::setBatchDirectives();
+    $self->{'batchdirectives'} .= "\n chdir $ENV{'PBS_O_WORKDIR'}\n";
+	
+}
+
 #==============================================================================
 #==============================================================================
 package Batch::BatchMaker_slurm;
@@ -1131,6 +1145,23 @@ sub writeBatchScript()
     }
     $self->SUPER::writeBatchScript();
 }
+#==============================================================================
+#==============================================================================
+package Batch::BatchMaker_eos;
+use base qw (Batch::BatchMaker);
+sub _test()
+{
+    my $self = shift;
+    return 1;
+}
+
+sub postBatchDirectives()
+{
+    my $self = shift;
+    $self->SUPER::setBatchDirectives();
+    $self->{'batchdirectives'} .= "\nchdir \$ENV{'PBS_O_WORKDIR'};\n";
+}
+
 
 
 1;

@@ -4,6 +4,7 @@
 #------------------------------------------------------------------------------
 {{ batchdirectives }}
 
+use Cwd;
 my $scriptname = $0;
 my $caseroot = `./xmlquery -value CASEROOT`;
 my $cimeroot = `./xmlquery -value CIMEROOT`;
@@ -13,7 +14,6 @@ my $perl5lib = "$cimeroot/utils/perl5lib";
 push(@INC, $perl5lib);
 require Config::SetupTools;
 require Batch::BatchUtils;
-use Cwd;
 require Log::Log4perl;
 
 my $level = Log::Log4perl::Level::to_priority("DEBUG");

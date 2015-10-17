@@ -149,7 +149,7 @@ my $batchmaker = Batch::BatchFactory::getBatchMaker( caseroot => $caseroot,
                                                      threaded => $build_threaded,
                                                      job => 'test');
 
-my $batchdirectives = $batchmaker->getBatchDirectives();
+my $batchdirectives = $batchmaker->getTestBatchDirectives();
                                                      
 
 ## create test file
