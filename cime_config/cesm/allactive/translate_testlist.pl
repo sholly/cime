@@ -5,6 +5,7 @@ use warnings;
 use diagnostics;
 use XML::LibXML;
 use Data::Dumper;
+use POSIX qw(strftime);
 {
     # Just a data class to make it easier to 
     # parse the xml testlist. 
@@ -28,7 +29,7 @@ use Data::Dumper;
         return $self;
     }
     
-    # print the old-school test list format. 
+    # print the textual format for comparison purposes
     # 
     sub repr()
     {
@@ -154,7 +155,6 @@ sub translate_testlist()
     my $x = $dom->toString(1);
     print $x . "\n";
     
-    #my @sortedtestscopy = @sortedtests;
     #while(@sortedtestscopy)
     my @testnodes = $testlistelement->findnodes("/testlist/test");
     foreach my $testelement(@testnodes)
@@ -165,64 +165,47 @@ sub translate_testlist()
         while(@sortedtestscopy)
         {
             my $test = shift @sortedtestscopy;
-            #print "testnode name: ", $testnode->getAttribute('name'), "\n";
-            #my @existingmachinesnode = $testelement->findnodes("//test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\']/machines");
-
-            #my @existingtestnode;
-            #if(defined $test->{testmods})
-            #{
-            #    @existingtestnode = $dom->findnodes("/testlist/test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\' and \@testmods=\'$test->{testmods}\']/machines/machine[\@name=\'$test->{machine}\' and \@compiler=\'$test->{compiler}\' and \@category=\'$test->{testtype}\']");
-            #}
-            #else
-            #{
-            #    @existingtestnode  = $dom->findnodes("/testlist/test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\']/machines/machine[\@name=\'$test->{machine}\' and \@compiler=\'$test->{compiler}\' and \@category=\'$test->{testtype}\']");
-            #}
-            #if(! @existingmachinesnode && ! @existingtestnode )
-            #{
-            #    my $machineselement = XML::LibXML::Element->new('machines');
-            #    my $machineelement = XML::LibXML::Element->new('machine');
-            #    $machineelement->setAttribute('name', $test->{machine});
-            #    #$machineelement->setAttribute('mpilib', '!mpi-serial');
-            #    $machineelement->setAttribute('category', $test->{testtype});
-            #    $machineelement->setAttribute('compiler', $test->{compiler});
-            #    $machineselement->appendChild($machineelement);
-            #    $testelement->appendChild($machineselement);
-            #    next; 
-            #}
-            #else
-            #{
-            #    # We should at least have an existing 'machines' element, with one or more children.  
-            #    # We should check to see if we have a match for the entirety of the test
-            #    my @existingnodes; 
-            #    if(defined $test->{testmods})
-            #    {
-            #        #print "testmods defined\n";
-            #        @existingnodes = $dom->findnodes("/testlist/test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\' and \@testmods=\'$test->{testmods}\']/machines/machine[\@name=\'$test->{machine}\' and \@compiler=\'$test->{compiler}\' and \@category=\'$test->{testtype}\']");
-            #    }
-            #    else
-            #    {
-            #        #print "testmods NOT defined\n";
-            #        @existingnodes = $dom->findnodes("/testlist/test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\']/machines/machine[\@name=\'$test->{machine}\' and \@compiler=\'$test->{compiler}\' and \@category=\'$test->{testtype}\']");
-            #    }
-            #    # If we don't have a test match, we need to add the new machine element to the machines element, 
-            #    # add that to the machines element
-            #    if(! @existingnodes)
-            #    {
-            #        my @machinesnodes = $testelement->findnodes("//test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\']/machines");
-            #        my $machinesnode = $machinesnodes[0];
-            #        my $newmachinenode = XML::LibXML::Element->new('machine');
-            #        $newmachinenode->setAttribute('name', $test->{machine});
-            #        $newmachinenode->setAttribute('category', $test->{testtype});
-            #        $newmachinenode->setAttribute('compiler', $test->{compiler});
-            #        
-            #        $machinesnode->appendChild($newmachinenode);
-            #    }
-            #}
+            #print Dumper $test;
+            my @existingtestnode;
+            if(defined $test->{testmods})
+            {
+                @existingtestnode = $dom->findnodes("//test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\' and \@testmods=\'$test->{testmods}\']/machines/machine[\@name=\'$test->{machine}\' and \@compiler=\'$test->{compiler}\' and \@category=\'$test->{testtype}\']");
+            }
+            else
+            {
+                @existingtestnode  = $dom->findnodes("//test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\']/machines/machine[\@name=\'$test->{machine}\' and \@compiler=\'$test->{compiler}\' and \@category=\'$test->{testtype}\']");
+            }
+            #print Dumper \@existingtestnode;
+            if(! @existingtestnode)
+            {
+                # find the <machines> element for this test node.
+                my @existingmachinesnodes = $testelement->findnodes("//test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\']/machines");
+                #print Dumper \@existingmachinesnodes;
+               
+                my $existingmachinesnode = $existingmachinesnodes[0];
+                my $machineelement = XML::LibXML::Element->new('machine');
+                $machineelement->setAttribute('name', $test->{machine});
+                $machineelement->setAttribute('compiler', $test->{compiler});
+                $machineelement->setAttribute('category', $test->{testtype});
+                $existingmachinesnode->appendChild($machineelement);
+            }
         }
     }
     $x = $dom->toString(1);
     print $x . "\n";
     return $dom;
 }
+
+sub writeXML
+{
+    my $newdom = shift;
+    my $dtformat = strftime "%d%b%Y-%H%M%S",  localtime;
+    my $newfile = "./testlist_allactive.$dtformat.xml";
+    open my $NEWXML, ">", "$newfile" or die $?;
+    my $newstring = $newdom->toString(1);
+    print $NEWXML $newstring;
+    close $NEWXML;
+}
 my $tests = &read_testlist( "./testlist_allactive.xml" );
 my $newdom = &translate_testlist($tests);
+&writeXML($newdom);

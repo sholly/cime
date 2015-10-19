@@ -1,0 +1,10 @@
+<test name="ERS_Ld11" grid="f09_g16" compset="B1850BDRD" testmods="allactive/default">
+  <machines>
+    <!-- not sure if we even need the mpilib attribute, and as it stands, compiler and category
+         will get separate 'machine' elements>
+    <machine name="yellowstone" mpilib="!mpi-serial" compiler="intel|pgi" category="prealpha|prebeta">
+      <wallclock>1:00:</wallclock>
+      <pecount>L</pecount>
+  </machines>
+
+</test>
