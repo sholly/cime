@@ -1,5 +1,5 @@
 package ConfigCase;
-my $pkg_nm = 'ConfigCase';
+my $pkg_nm = __PACKAGE__;
 
 #-----------------------------------------------------------------------------------------------
 # SYNOPSIS
@@ -70,27 +70,16 @@ use English;
 #use warnings;
 #use diagnostics;
 use IO::File;
-use Data::Dumper;
 use XML::LibXML;
 use File::Basename;
+use Log::Log4perl qw(get_logger);
+use SetupTools;
 
-# Check for the existence of XML::LibXML in whatever perl distribution happens to be in use.
-# If not found, print a warning message then exit.
-eval {
-    require XML::LibXML;
-    XML::LibXML->import();
-};
-if($@)
-{
-    my $warning = <<END;
-WARNING:
-  The perl module XML::LibXML is needed for XML parsing in the CIME script system.
-  Please contact your local systems administrators or IT staff and have them install it for
-  you, or install the module locally.  
 
-END
-    print "$warning\n";
-    exit(1);
+my $logger;
+
+BEGIN{
+    $logger = get_logger();
 }
 
 #-----------------------------------------------------------------------------------------------
@@ -112,11 +101,11 @@ sub add_config_variables
 
     my ($self, $file, $srcroot, $cimeroot, $model) = @_;
 
-    (-f $file) || die "ERROR ConfigCase.pm::add_config_variables file \'$file\' does not exist \n";
+    (-f $file) or $logger->logdie ("ERROR ConfigCase.pm::add_config_variables file \'$file\' does not exist \n");
     my $xml = XML::LibXML->new( no_blanks => 1)->parse_file($file);
     my @nodes = $xml->findnodes(".//entry");
     if (! @nodes) {
-	die "ERROR add_config_variables: no variable elements in file $file \n"; 
+	$logger->logdie( "ERROR add_config_variables: no variable elements in file $file \n"); 
     }
     foreach my $node (@nodes) 
     {
@@ -124,25 +113,49 @@ sub add_config_variables
 	foreach my $define_node ($node->childNodes()) 
 	{
 	    my $node_name  = $define_node->nodeName();
-	    my $node_value = $define_node->textContent();
-
-	    if (defined $node_value) {
-		$node_value =~ s/\$MODEL/$model/;
-		$node_value =~ s/\$CIMEROOT/$cimeroot/;
-		if (-d $srcroot) {
-		    $node_value =~ s/\$SRCROOT/$srcroot/;
+	    #
+            # This creates a hash of values with attribute name and id as keys
+            #
+	    if($node_name eq "values"){
+		foreach my $val_node ($define_node->childNodes()){
+                    if($val_node->hasAttributes()){		 
+                    my @att = $val_node->attributes();
+		    foreach my $attstr (@att){
+			$attstr =~ /(\w+)=\"(.*)\"/;
+	                my $att = $1;
+	                my $att_val = $2;
+			my $val =  $val_node->textContent();		
+			$val =~ s/\$MODEL/$model/;
+			$val =~ s/\$CIMEROOT/$cimeroot/;
+			if (-d $srcroot) {
+			    $val =~ s/\$SRCROOT/$srcroot/;
+			}			
+			$self->{$id}{$att}{$att_val} = $val;
+		    }
+}
 		}
 
-		# now set the initial value to the default value - this can get overwritten
-		if ($node_name eq 'default_value') {
-		    $self->{$id}->{'value'} = $node_value;
-		} else {
-		    $self->{$id}->{$node_name} = $node_value;
+	    }else{
+		my $node_value = $define_node->textContent();
+		if (defined $node_value) {
+		    $node_value =~ s/\$MODEL/$model/;
+		    $node_value =~ s/\$CIMEROOT/$cimeroot/;
+		    if (-d $srcroot) {
+			$node_value =~ s/\$SRCROOT/$srcroot/;
+		    }
+
+		    # now set the initial value to the default value - this can get overwritten
+		    if ($node_name eq 'default_value') {
+			$self->{$id}{'value'} = $node_value;
+		    } else {
+			$self->{$id}{$node_name} = $node_value;
+		    }
+		    $logger->debug("id= $id name = $node_name value = $node_value\n");
 		}
 	    }
 	}
-	if (! defined $self->{$id}->{'value'} ) {
-	    die "ERROR add_config_variables: default_value must be set for $id in $file\n";
+	if (! defined $self->{$id}{'value'} ) {
+	    $logger->logdie( "ERROR add_config_variables: default_value must be set for $id in $file\n");
 	}
     }
 }
@@ -157,11 +170,10 @@ sub set
     # true/false return before calling the set method.
 
     my ($self, $id, $value) = @_;
-    require SetupTools;
 
     # Check that the parameter name is in the configuration definition
     unless ($self->is_valid_name($id)) { 
-	die "ERROR ConfigCase::set: $id is not a valid name \n";
+	$logger->logdie ("ERROR ConfigCase::set: $id is not a valid name \n");
     }
 
     # Get the type description hash for the variable and check that the type is valid
@@ -174,8 +186,9 @@ sub set
     if ( defined $valid_values && $valid_values ne "" ) {
 	my $value = _clean($value);
 	my $is_list_value = $self->{$id}->{'list'};
-	SetupTools::is_valid_value($id, $value, $valid_values, $is_list_value) or die
-	    "ERROR: value of $value is not a valid value for parameter $id: valid values are $valid_values\n";
+	SetupTools::is_valid_value($id, $value, $valid_values, $is_list_value) 
+	    or $logger->logdie(
+		"ERROR: value of $value is not a valid value for parameter $id: valid values are $valid_values\n");
     }
     # Add the new value to the object's internal data structure.
     $self->{$id}->{'value'} = $value;
@@ -187,12 +200,34 @@ sub set
 sub get
 {
     # Return requested value.
-    my ($self, $name) = @_;
+    my ($self, $name, $attribute, $id ) = @_;
 
-    defined($self->{$name}) or die "ERROR ConfigCase.pm::get: unknown parameter name: $name\n";
-
-    return $self->{$name}->{'value'};
+    defined($self->{$name}) or $logger->logdie( "ERROR ConfigCase.pm::get: unknown parameter name: $name\n");
+    $logger->debug("GET: $name $self->{$name}->{value}\n");
+    if(defined $attribute && defined $id){
+	if(defined $self->{$name}{$attribute}){
+	    my $val = $self->{$name}{$attribute}{$id};
+	    if(! defined $val){
+		$logger->warn("No match for $attribute and $id in $name");
+	    }
+	    return $val;
+	}else{
+	    $logger->warn("No values found for $name");
+	}
+    }
+    return $self->{$name}{'value'};
 }
+
+sub getkeys{
+    my ($self, $name,$attribute) = @_;
+    my @keys;
+    defined($self->{$name}) 
+	or $logger->logdie( "ERROR ConfigCase.pm::getkeys: unknown parameter name: $name");
+    defined($self->{$name}{$attribute}) 
+	or $logger->logdie( "ERROR ConfigCase.pm::getkeys: unknown attribute $attribute for parameter name: $name");
+    return(keys %{$self->{$name}{$attribute}});
+}
+
 
 #-----------------------------------------------------------------------------------------------
 sub get_valid_values
@@ -249,7 +284,7 @@ sub write_file
     if ($output_xml_file =~ /env_archive.xml/) {
 
 	if (! $input_xml_file ) {
-	    die "ERROR write_file: must specify input_xml_file as argument for writing out $output_xml_file \n";
+	    $logger->logdie ("ERROR write_file: must specify input_xml_file as argument for writing out $output_xml_file \n");
 	} else {
 	    open CONFIG_ARCHIVE, $input_xml_file or die $!;
 	    while (<CONFIG_ARCHIVE>) {
@@ -262,18 +297,19 @@ sub write_file
     } else {
 
 	my @groups;
+	my $file_xml = basename($output_xml_file);
 	foreach my $id (keys %$self) {
 	    my $file_id  = $self->{$id}->{'file'};
 	    next unless defined $file_id;
-	    my $file_xml = basename($output_xml_file);
 
 	    if ($file_id eq $file_xml) {
 		my $group = $self->{$id}->{'group'};
 		push (@groups, $group);
 	    }
 	}
-	@groups = _unique(@groups);
 	@groups = sort (@groups);
+	@groups = _unique(@groups);
+
 
 	# Write all the groups out to the target xml file
 	print $fh "\n\n";
@@ -284,17 +320,40 @@ sub write_file
 	print $fh "</groups>\n";   	    
 	print $fh "\n";
 
+	my @subgroups = qw(none);
+	if($output_xml_file =~ "env_batch.xml"){
+	    @subgroups = qw(run test st_archive lt_archive);
+	}
+
+	my $indent = "  ";
 	# Write out all necessary groups to the output xml file
 	foreach my $group (@groups) {
-	    foreach my $id (sort keys %$self) {
-		if ($self->{$id}->{'group'} eq $group ) {
-		    my $value         = $self->{$id}->{'value'};
-		    my $type          = $self->{$id}->{'type'};
-		    my $valid_values  = $self->{$id}->{'valid_values'};
-		    my $desc          = $self->{$id}->{'desc'};
-		    my $is_list_value = $self->{$id}->{'list'};
-		    write_xml_entry($fh, $id, $value, $type, $valid_values, $desc, $group, $is_list_value);
+	    foreach my $subgroup (@subgroups){
+		if($subgroup ne "none"){
+		    print $fh "  <job name=\"$subgroup\">";
+		    my $indent = "      ";
 		}
+		foreach my $id (sort keys %$self) {
+		    if ($self->{$id}->{'group'} eq $group ) {
+			my $value         = $self->{$id}->{'value'};
+			my $type          = $self->{$id}->{'type'};
+			my $valid_values  = $self->{$id}->{'valid_values'};
+			my $desc          = $self->{$id}->{'desc'};
+			my $is_list_value = $self->{$id}->{'list'};
+			my $file          = $self->{$id}->{'file'};
+			if (defined $file) {
+			    if ($file eq $file_xml) {
+				write_xml_entry($fh, $id, $value, $type, $valid_values, $desc, $group, $is_list_value, $indent);
+			    }
+			} else {
+			    $logger->logdie("file attribute for variable $id is not defined \n");
+			}
+		    }
+		}
+		if($subgroup ne "none"){
+		    print $fh "  </job>\n";
+		}
+
 	    }
 	}
     }
@@ -306,8 +365,8 @@ sub write_file
 sub write_xml_entry
 {
     # Output xml file entry
-    my ($fh, $id, $value, $type, $valid_values, $desc, $group, $is_list_value) = @_;
-
+    my ($fh, $id, $value, $type, $valid_values, $desc, $group, $is_list_value,$indent) = @_;
+    $indent="" unless defined($indent);
     $value =~ s/'/&apos;/g;
     $value =~ s/\</&lt;/g;
     $value =~ s/\</&gt;/g;
@@ -321,13 +380,13 @@ sub write_xml_entry
 	$desc = "no description available";
     }
     print $fh "\n";
-    print $fh "<entry id=\"$id\"  value=\"$value\">\n";   	    
-    print $fh "  <type>$type</type> \n"; 
-    if (defined $valid_values && $valid_values  ne '') {print $fh "  <valid_values>$valid_values</valid_values> \n";}
-    if (defined $is_list_value && $is_list_value ne '') {print $fh "  <list>$is_list_value</list> \n";}
-    print $fh "  <group>$group</group> \n"; 
-    print $fh "  <desc>$desc</desc> \n";
-    print $fh "</entry> \n";
+    print $fh "$indent<entry id=\"$id\"  value=\"$value\">\n";   	    
+    print $fh "$indent  <type>$type</type> \n"; 
+    if (defined $valid_values && $valid_values  ne '') {print $fh "$indent  <valid_values>$valid_values</valid_values> \n";}
+    if (defined $is_list_value && $is_list_value ne '') {print $fh "$indent  <list>$is_list_value</list> \n";}
+    print $fh "$indent  <group>$group</group> \n"; 
+    print $fh "$indent  <desc>$desc</desc> \n";
+    print $fh "$indent</entry> \n";
 }
 
 #-----------------------------------------------------------------------------------------------
@@ -338,7 +397,7 @@ sub _get_type
 # Return 'type' attribute for requested variable
 
     my ($self, $name) = @_;
-
+    
     return $self->{$name}->{'type'};
 }
 
@@ -361,7 +420,7 @@ sub _get_typedesc
     if ($type_def =~ /^(char|logical|integer|real)/ ) {
 	$datatype{'type'} = $1;
     } else {
-	die "ERROR: in $nm (package $pkg_nm): datatype $type_def is NOT valid for $name \n";
+	$logger->logdie ("ERROR: in $nm (package $pkg_nm): datatype $type_def is NOT valid for $name \n");
     }
     if ( $datatype{'type'} eq "char" ) {
        if ($type_def =~ /^char\*([0-9]+)/ ) {
@@ -402,7 +461,9 @@ sub _print_file_header
     my $outputfile = basename($filename);
     my $xml = XML::LibXML->new( no_blanks => 1)->parse_file($headerfile);
     my @nodes = $xml->findnodes(".//file[\@name=\"$outputfile\"]/header");
-    if (! @nodes) {die " ERROR: no header nodes found for file $outputfile \n";}
+    if (! @nodes) {
+	$logger->logdie (" ERROR: no header nodes found for file $outputfile \n");
+    }
     my $text = $nodes[0]->textContent();
     chomp($text);
     print $fh "<header>\n";
@@ -435,7 +496,7 @@ sub write_docbook_master
     $fh = IO::File->new($filename, '>' ) or die "can't open file: $filename\n";
 
     my $gid;
-
+    $logger->info("Writing $filename\n");
     if ($filename =~ "case") { 
         $gid = "case";
 	print $fh "<table><title>env_case.xml variables</title>\n";

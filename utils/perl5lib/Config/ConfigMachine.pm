@@ -1,31 +1,17 @@
 package ConfigMachine;
-my $pkg_nm = 'ConfigMachines';
+my $pkg_nm = 'ConfigMachine';
 
 use strict;
 use English;
 use Cwd qw( getcwd abs_path chdir);
 use IO::File;
 use XML::LibXML;
-use Data::Dumper;
 use File::Basename;
+use Log::Log4perl qw(get_logger);
+my $logger;
 
-# Check for the existence of XML::LibXML in whatever perl distribution happens to be in use.
-# If not found, print a warning message then exit.
-eval {
-    require XML::LibXML;
-    XML::LibXML->import();
-};
-if($@)
-{
-    my $warning = <<END;
-WARNING:
-  The perl module XML::LibXML is needed for XML parsing in the CIME script system.
-  Please contact your local systems administrators or IT staff and have them install it for
-  you, or install the module locally.  
-
-END
-    print "$warning\n";
-    exit(1);
+BEGIN{
+    $logger = get_logger();
 }
 
 #-----------------------------------------------------------------------------------------------
@@ -41,21 +27,23 @@ sub setMachineFile
     my $machines_file = $nodes[0]->textContent();
     $machines_file =~ s/\$CIMEROOT/$cimeroot/;
     $machines_file =~ s/\$MODEL/$model/;
-    (-f "$machines_file")  or  die "*** Cannot find supported machines file $machines_file ***\n";
-
+    unless(-f "$machines_file"){
+	$logger->logdie("*** Cannot find supported machines file $machines_file ***\n");
+	exit 1;
+    }
     if ($machine =~ /(.*)_(.*)/){
 	$machine = $1;
     }
 
-    my $xml = XML::LibXML->new( no_blanks => 1)->parse_file($machines_file);
-    my @nodes = $xml->findnodes(".//machine[\@MACH=\"$machine\"]");
-    if (@nodes) {
-	print "Found machine \"$machine\" in $machines_file \n";
+    my $machxml = XML::LibXML->new( no_blanks => 1)->parse_file($machines_file);
+    my @machnodes = $machxml->findnodes(".//machine[\@MACH=\"$machine\"]");
+    if (@machnodes) {
+	$logger->info("Found machine \"$machine\" in $machines_file \n");
     } else {
-	print "ERROR ConfigMachine::setMachineFile: no match for machine $machine :\n";
-	print "  - possible machine values are \n";
+	$logger->error( "ERROR ConfigMachine::setMachineFile: no match for machine $machine 
+	                 - possible machine values are: \n");
 	listMachines( "$machines_file" );
-	die "Exiting \n";
+	return 0;
     }	    
     return $machines_file;
 }
@@ -64,59 +52,69 @@ sub setMachineFile
 sub setMachineValues
 {
     # Set the parameters for the specified machine.  
-    my ($file_config, $primary_component, $machine, $compiler, $print_flag, $config) = @_;
+    my ( $file_config, $primary_component, $machine, $config) = @_;
 
     my $model = $config->get('MODEL');
     my $machines_file = $config->get('MACHINES_SPEC_FILE');
     $machines_file =~ s/\$MODEL/$model/;
-    (-f "$machines_file")  or  die "*** Cannot find supported machines file $machines_file ***\n";
+    if(! -f "$machines_file") {
+	$logger->error("*** Cannot find supported machines file $machines_file ***\n");
+	exit 1;
+    }
     my $machines_dir  = dirname($machines_file);
 
     # First Check if the target machine is supported
     if ($machine =~ /(.*)_(.*)/){
 	$machine  = $1;
-	$compiler = $2 unless defined($compiler);
+	$config->set('COMPILER', "$2");
     }
 
     my $xml = XML::LibXML->new( no_blanks => 1)->parse_file($machines_file);
     my @nodes = $xml->findnodes(".//machine[\@MACH=\"$machine\"]");
     if (@nodes) {
-	print "Found machine \"$machine\" in $machines_file \n";
+	$logger->info( "Found machine \"$machine\" in $machines_file ");
     } else {
-	print "ERROR ConfigMachine::setMachineValues: no match for machine $machine :\n";
-	print "  - possible machine values are \n";
+	$logger->fatal("ERROR ConfigMachine::setMachineValues: no match for machine $machine :");
+	$logger->fatal("  - possible machine values are ");
 	listMachines( "$machines_file" );
-	die "Exiting \n";
+	$logger->logdie( "Exiting ");
     }	    
+    my $compiler = $config->get('COMPILER');
+    my $mpilib = $config->get('MPILIB');
 
-    if (defined $compiler) {
-	$config->set('COMPILER', "$compiler");
-    } else {
+    if (!defined $compiler) {
 	my @nodes = $xml->findnodes(".//machine[\@MACH=\"$machine\"]/COMPILERS");
 	my $compilers = $nodes[0]->textContent();
 	my @compilers = split(/,/,$compilers);
-	my $compiler = $compilers[0];
+	$compiler = $compilers[0];
 	$config->set('COMPILER', "$compiler");
+    }	
+    if (!defined $mpilib) {
+	my @nodes = $xml->findnodes(".//machine[\@MACH=\"$machine\"]/MPILIBS");
+	my $mpilibs = $nodes[0]->textContent();
+	my @mpilibs = split(/,/,$mpilibs);
+	$mpilib = $mpilibs[0];
+	$config->set('MPILIB', "$mpilib");
     }	
     $config->set('MACH'         ,  $machine);
     $config->set('MACHINES_FILE', "$machines_file");
     $config->set('MACHDIR'      , "$machines_dir");
 
     # Set the machine values obtained from the $machines_file
-    _set_machine_values($print_flag, $config);
+    _set_machine_values($config);
 
     # Check that compiler request for target machine matches a supported value
     # Or set default compiler - if not provided compiler request
-    _check_machine_compilers($print_flag, $config);
+    _check_machine_compilers($config);
 
-    if ($print_flag >= 2) { print "Machine specifier: $machine.\n"; }
+    $logger->info( "Machine specifier: $machine.\n");
 
     # Determine pio settings for target machine
     # Note that any pio settings that are grid or compset dependent will be overwritten
     # by the config_pio.xml settings for the primary component
     _setPIOsettings($file_config, $primary_component, $config);
 
-    if ($print_flag >= 2) { print "Set pio settings for $machine.\n"; }
+    $logger->info("Set pio settings for $machine.\n");
 }
 
 #-------------------------------------------------------------------------------
@@ -128,15 +126,16 @@ sub listMachines
     my $parser = XML::LibXML->new( no_blanks => 1);
     my $xml = $parser->parse_file($machine_file);
 
-    print ("  \n");
-    print ("  MACHINES:  name (description)\n");
+    $logger->warn ("  MACHINES:  name (description)\n");
 
     foreach my $node ($xml->findnodes(".//machine")) {
+	next if ($node->nodeType() == XML_COMMENT_NODE);
 	my $name = $node->getAttribute('MACH');
 	foreach my $child ($node->findnodes("./*")) {
+	    next if ($child->nodeType() == XML_COMMENT_NODE);
 	    if ($child->nodeName() eq 'DESC') {
 		my $desc = $child->textContent();
-		print "    $name ($desc) \n";		
+		$logger->warn( "    $name ($desc) \n");		
 	    }
 	}
     }
@@ -148,7 +147,7 @@ sub listMachines
 sub _set_machine_values
 {
     # open the specified xml file
-    my ($print_flag, $config) = @_;
+    my ($config) = @_;
 
     my $machine       = $config->get('MACH'); 
     my $machines_file = $config->get('MACHINES_FILE');
@@ -163,7 +162,8 @@ sub _set_machine_values
 	    next if($name eq "module_system");
 	    my $value = $node->textContent();
 	    if ( ! $config->is_valid_name($name) ) { 
-		die "set_machine: invalid id $name in machine $machine file $machines_file exiting\n"; 
+		$logger->logdie("set_machine: invalid id $name in machine $machine file $machines_file exiting\n");
+		return;
 	    }
 	    # allow for environment variables in the config_machines.xml file using $ENV{variablename} syntax
 	    if ($value =~/^(.*)\$ENV{([^}]*)}(.*)$/){
@@ -172,17 +172,21 @@ sub _set_machine_values
 		    $value = $1.$value if (defined $1);
 		    $value .= $3 if (defined $3);
 		}else{
-		    die "No environment setting found for $2 $name $value";
+		    $logger->warn( "No environment setting found for $2 in $name=$value");
 		}
 	    }
-	    $config->set($name, $value);
-	    print "config: $name set to ".$config->get($name)."  $value\n" if($print_flag==2);
+	    if($machine eq "userdefined" && $value =~ /USERDEFINED/){
+		$logger->warn("Value for $name not set");
+	    }else{
+		$config->set($name, $value);
+	    }
+	    $logger->debug( "config: $name set to ".$config->get($name)."  $value\n" );
 	}
     } 
     else 
     {
-	print "ERROR: ConfigMachine::_set_machine_values: no specifications contained for machine $machine :\n";
-	die "exiting\n"; 
+	$logger->logdie( "ERROR: ConfigMachine::_set_machine_values: no specifications contained for machine $machine :\n");
+	return; 
     }
 }
 
@@ -192,7 +196,7 @@ sub _check_machine_compilers
     # Check that compiler request for target machine matches a supported value
     # Or set default compiler - if not provided compiler request
 
-    my ($print_flag, $config) = @_;
+    my ( $config) = @_;
 
     my $machine   = $config->get('MACH'); 
     my $caseroot  = $config->get('CASEROOT');
@@ -214,16 +218,19 @@ sub _check_machine_compilers
 		}
 		if (!$found) {
 		    my $sysmod = "rm -rf $caseroot";
-		    system($sysmod) == 0 or die "ERROR: $sysmod failed: $?\n";
-		    die "ERROR: compiler setting of $compiler does not match supported values of $compilers \n";
+		    unless(system($sysmod) == 0) {
+			$logger->fatalxs("ERROR: $sysmod failed: $?\n");
+		    }
+		    $logger->logdie( "ERROR: compiler setting of $compiler does not match supported values of $compilers \n");
+		    return;
 		}
 	    }
 	    $config->set('COMPILER', "$compiler");
-	    if ($print_flag >= 2) { print "Machine compiler specifier: $compiler\n"; }
+	    $logger->info( "Machine compiler specifier: $compiler\n");
 	} else {
 	    $compiler = $compilers[0];   
 	    $config->set('COMPILER', "$compiler");
-	    if ($print_flag >= 2) { print "Machine compiler specifier: $compiler\n"; }
+	    $logger->info("Machine compiler specifier: $compiler\n");
 	}
     }
 }
@@ -246,6 +253,7 @@ sub _setPIOsettings
 
     foreach my $entry ($xml->findnodes(".//entry")) {
 	my $id = $entry->getAttribute('id');
+	my $default;
 
 	# Loop over each value node for the given entry node
 	my $index_match   = -1;
@@ -258,10 +266,15 @@ sub _setPIOsettings
 	    $value_counter++;
 	    my $attr_value;
 	    my $matches = 0;
-	    MATCH: foreach my $attr ($value->attributes()) {
+	    my @attributes = $value->attributes();
+            #
+	    if($#attributes<0){
+		$default = $value->textContent();
+	    }
+	    MATCH: foreach my $attr (@attributes) {
 		$attr_value = $attr->value(); 
-		my $attr_name  = $attr->name();
-		my $target = $config->get(uc $attr_name);
+		my $attr_name  =uc $attr->name();
+		my $target = $config->get( $attr_name);
 		if (($attr_value =~ /^\!/) && ($target !~ m/$attr_value/)) {
 		    $matches++;
 		} elsif ($target =~ m/$attr_value/) {
@@ -277,7 +290,7 @@ sub _setPIOsettings
 	    # reset $max_matches and set new value for $index_match
 	    if ($matches > $max_matches) {
 		$max_matches = $matches;
-		$index_match = $value_counter;
+		$index_match = $value_counter-1;
 	    }
 	}
 
@@ -285,7 +298,10 @@ sub _setPIOsettings
 	if ($index_match > -1) {
 	    my $newval = $values[$index_match]->textContent();
 	    $config->set($id, $newval);
+	}elsif(defined $default){
+	    $config->set($id, $default);
 	}
+
     }
 }
 

@@ -8,24 +8,11 @@ use IO::File;
 use XML::LibXML;
 use Data::Dumper;
 use ConfigCase;
+use Log::Log4perl qw(get_logger);
+my $logger;
 
-# Check for the existence of XML::LibXML in whatever perl distribution happens to be in use.
-# If not found, print a warning message then exit.
-eval {
-    require XML::LibXML;
-    XML::LibXML->import();
-};
-if($@)
-{
-    my $warning = <<END;
-WARNING:
-  The perl module XML::LibXML is needed for XML parsing in the CIME script system.
-  Please contact your local systems administrators or IT staff and have them install it for
-  you, or install the module locally.  
-
-END
-    print "$warning\n";
-    exit(1);
+BEGIN{
+    $logger = get_logger();
 }
 
 # Global variable
@@ -122,20 +109,19 @@ sub getCompsetLongname
 
     }
     if (! defined $pes_setby) {
-	print "ERROR create_newcase: no compset match was found in any of the following files \n";
+	my $outstr = "ERROR create_newcase: no compset match was found in any of the following files:";
 	foreach my $node_file (@nodes) {
 	    my $file = $node_file->textContent();
 	    $file =~ s/\$CIMEROOT/$cimeroot/;
 	    $file =~ s/\$SRCROOT/$srcroot/;
 	    $file =~ s/\$MODEL/$model/;
-	    print " $file \n";
+	    $outstr .= "$file\n";
 	}
-	die "Exiting";
+	$logger->logdie ($outstr);
     } else {
-	print "\n";
-	print "File specifying possible compsets: $compsets_file \n";
-	print "Primary component (specifies possible compsets, pelayouts and pio settings): $pes_setby \n";
-	print "Compset: $compset_longname \n";
+	$logger->info( "File specifying possible compsets: $compsets_file ");
+	$logger->info( "Primary component (specifies possible compsets, pelayouts and pio settings): $pes_setby ");
+	$logger->info("Compset: $compset_longname ");
     }   
 
     return ($pes_setby, $support_level);
@@ -151,6 +137,7 @@ sub getGridLongname
     my $compset_match;
 
     my $grids_file = $config->get('GRIDS_SPEC_FILE');
+    my $compset_longname = $config->get('COMPSET');
 
     my $xml = XML::LibXML->new( no_blanks => 1)->parse_file($grids_file);
     my @nodes_alias = $xml->findnodes(".//grid[alias=\"$grid_input\"]");
@@ -158,12 +145,35 @@ sub getGridLongname
     my @nodes_lname = $xml->findnodes(".//grid[lname=\"$grid_input\"]");
 
     my $grid_node;
-    if (@nodes_alias) {
-	$grid_node = $nodes_alias[0];
-    } elsif (@nodes_lname) {
+    if (@nodes_lname) {
+	if($#nodes_lname > 0){
+	    $logger->logdie("ERROR: more than one grid longname match in file $grids_file");
+	}
 	$grid_node = $nodes_lname[0];
+    }elsif (@nodes_alias) {
+	foreach my $node (@nodes_alias){
+	    if($node->hasAttributes()){
+		my $attr = $node->getAttribute('compset');		
+		if($compset_longname =~ m/$attr/){
+		    $grid_node = $node;
+		}
+	    }elsif(! defined $grid_node){    
+#           This is the default value, it is overwritten by any compset match value
+		$grid_node = $node;
+	    }
+	}
     } elsif (@nodes_sname) {
-	$grid_node = $nodes_sname[0];
+	foreach my $node (@nodes_sname){
+	    if($node->hasAttributes()){
+		my $attr = $node->getAttribute('compset');		
+		if($compset_longname =~ m/$attr/){
+		    $grid_node = $node;
+		}
+	    }elsif(! defined $grid_node){    
+#           This is the default value, it is overwritten by any compset match value
+		$grid_node = $node;
+	    }
+	}
     } else { 
 	die " ERROR: no supported grid match for target grid $grid_input ";
     }
@@ -190,17 +200,18 @@ sub getGridLongname
     $grid_longname =~ /(m%)(.+)(_g%)/ ; $compgrid{'mask'} = $2; 
 
     my @nodes = $xml->findnodes(".//grid[lname=\"$grid_longname\"]");
-    if ($#nodes != 0) {
+    if ($#nodes < 0) {
 	die "ERROR ConfigCompsetGrid::checkGrid : no match found for $grid_longname \n";
     } 
     my $attr = $nodes[0]->getAttribute('compset');
+
     if (defined $attr) {
 	my $compset = $config->get('COMPSET');
 	if ($compset !~ m/$attr/) {
 	    die "ERROR ConfigCompsetGrid::getGridLongame $grid_longname is not supported for $compset \n";
 	}
     }
-
+    $logger->info("grid longname is : $grid_longname");
     return ($grid_longname);
 }
 
@@ -344,11 +355,23 @@ sub setGridMaps
     @nodes = $xml->findnodes(".//gridmap[\@glc_grid=\"$glc_grid\" and \@lnd_grid=\"$lnd_grid\"]/GLC2LND_FMAPNAME");
     if (@nodes) {$config->set('GLC2LND_FMAPNAME',$nodes[0]->textContent())}
 
-    @nodes = $xml->findnodes(".//gridmap[\@glc_grid=\"$glc_grid\" and \@ice_grid=\"$ice_grid\"]/GLC2ICE_RMAPNAME");
+    @nodes = $xml->findnodes(".//gridmap[\@glc_grid=\"$glc_grid\" and \@ocn_grid=\"$ocn_grid\"]/GLC2ICE_RMAPNAME");
     if (@nodes) {$config->set('GLC2ICE_RMAPNAME',$nodes[0]->textContent())}
 
     @nodes = $xml->findnodes(".//gridmap[\@glc_grid=\"$glc_grid\" and \@ocn_grid=\"$ocn_grid\"]/GLC2OCN_RMAPNAME");
     if (@nodes) {$config->set('GLC2OCN_RMAPNAME',$nodes[0]->textContent())}
+
+    @nodes = $xml->findnodes(".//gridmap[\@atm_grid=\"$atm_grid\" and \@wav_grid=\"$wav_grid\"]/ATM2WAV_SMAPNAME");
+    if (@nodes) {$config->set('ATM2WAV_SMAPNAME',$nodes[0]->textContent())}
+
+    @nodes = $xml->findnodes(".//gridmap[\@ocn_grid=\"$ocn_grid\" and \@wav_grid=\"$wav_grid\"]/ICE2WAV_SMAPNAME");
+    if (@nodes) {$config->set('ICE2WAV_SMAPNAME',$nodes[0]->textContent())}
+
+    @nodes = $xml->findnodes(".//gridmap[\@ocn_grid=\"$ocn_grid\" and \@wav_grid=\"$wav_grid\"]/OCN2WAV_SMAPNAME");
+    if (@nodes) {$config->set('OCN2WAV_SMAPNAME',$nodes[0]->textContent())}
+
+    @nodes = $xml->findnodes(".//gridmap[\@ocn_grid=\"$ocn_grid\" and \@wav_grid=\"$wav_grid\"]/WAV2OCN_SMAPNAME");
+    if (@nodes) {$config->set('WAV2OCN_SMAPNAME',$nodes[0]->textContent())}
 }
 
 #-------------------------------------------------------------------------------
@@ -402,9 +425,8 @@ sub setCompsetGeneralVars
 	  }
 	} else {
 	    my $cimeroot = $config->get('CIMEROOT');
-	    print "ERROR : $id is not a valid name in $compsets_file \n";
-	    print "*** See possible values in file $cimeroot/driver_cpl/cimeconfig/config_cime.xml ***";
-	    die "Exiting";
+	    $logger->logdie( "ERROR : $id is not a valid name in $compsets_file 
+	    *** See possible values in file $cimeroot/driver_cpl/cimeconfig/config_cime.xml ***");
 	}
     }
 }
@@ -441,16 +463,16 @@ sub setComponent {
 	}
     }
     if (! defined $found_match) {
-	print "\n ERROR ConfigCompsetGrid::setComponent: no match found in desc elements in file \n";
-	print "         $setup_comp_file \n";
-	print "      for $compset_longname \n"; 
-	print "         Possible matches are: \n\n";
+	$logger->fatal( "ERROR ConfigCompsetGrid::setComponent: no match found in desc elements in file 
+	         $setup_comp_file 
+	      for $compset_longname  
+	        Possible matches are: ");
 	foreach my $node ($xml->findnodes(".//description/desc")) {
 	    my $match = $node->getAttribute('compset');
 	    my $desc  = $node->textContent();
-	    print "     $match: $desc \n";
+	    $logger->fatal("     $match: $desc ");
 	}
-	die "Exiting"; 
+	$logger->logdie ("Exiting"); 
     }
 
     # Now set the actual values of the variable
@@ -461,6 +483,8 @@ sub setComponent {
 	my $name     = $variable_node->getAttribute('id');
 	my @additive = $variable_node->findnodes("./values[\@additive=\"yes\"]");
 	my @merge    = $variable_node->findnodes("./values[\@merge=\"yes\"]");
+
+
 	foreach my $value_node ($variable_node->findnodes('./values/value')) {
 	    if ($value_node->nodeType() == XML_COMMENT_NODE) {
 		# do nothing
@@ -481,16 +505,16 @@ sub setComponent {
 			$match = 'yes';
 		    }
 		}
-		
+
 		if ($match eq 'yes') {
-		    if ($config->is_valid_name($name)) {
-			# do nothing
-		    } else {
+		    unless ($config->is_valid_name($name)) {
 			die "ERROR ConfigCompsetGrid::setComponent: $name is not a valid name \n";
 		    }
 
 		    my $input_val = $value_node->textContent();
 		    my $current_val = $config->get($name);
+
+
 		    if (@additive) {
 			$new_val = _setComponentAdditiveNewVal($current_val, $input_val);
 		    } elsif (@merge) {
@@ -500,6 +524,7 @@ sub setComponent {
 		    }
 		    $newxml{$name} = $new_val; 
 		    $config->set($name, $new_val);
+
 		}
 	    }
 	}
@@ -535,7 +560,7 @@ sub setComponent {
 #-------------------------------------------------------------------------------
 sub printGridCompsetInfo 
 {
-    my ($grids_file, $print_flag, $config) = @_;
+    my ($grids_file,  $config) = @_;
 
     my $caseroot	   = $config->get('CASEROOT');
     my $grid_longname	   = $config->get('GRID');
@@ -603,42 +628,39 @@ sub printGridCompsetInfo
 	}
     }
 
-    if ($print_flag) {
-	my $compset_longname = $config->get('COMPSET');
+    my $compset_longname = $config->get('COMPSET');
 
-	my $fh_case = new IO::File;
-	$fh_case->open(">>$caseroot/README.case") or die "can't open file: README.case\n";
+    my $fh_case = new IO::File;
+    $fh_case->open(">>$caseroot/README.case") or die "can't open file: README.case\n";
 
-	my $fh_stdout = *STDOUT;
-	my @file_handles = ($fh_stdout, $fh_case);
+    my $fh_stdout = *STDOUT;
+    my $outstr;
+    $outstr .= "Component set: longname \n";
+    $outstr .= "  $compset_longname \n";
+    $outstr .= "Component set Description: \n";
+    $outstr .= " $desc_comp \n";
+    $outstr .= "Grid: \n";
+    $outstr .= "  $grid_longname \n";
+    $outstr .= "  ATM_GRID = $atm_grid  NX_ATM=$atm_nx NY_ATM=$atm_ny \n";
+    $outstr .= "  LND_GRID = $lnd_grid  NX_LND=$lnd_nx NX_LND=$lnd_ny \n";
+    $outstr .= "  ICE_GRID = $ice_grid  NX_ICE=$ice_nx NX_ICE=$ice_ny \n";
+    $outstr .= "  OCN_GRID = $ocn_grid  NX_OCN=$ocn_nx NX_OCN=$ocn_ny \n";
+    $outstr .= "  ROF_GRID = $rof_grid  NX_ROF=$rof_nx NX_ROF=$rof_ny \n";
+    $outstr .= "  GLC_GRID = $glc_grid  NX_GLC=$glc_nx NX_GLC=$glc_ny \n";
+    $outstr .= "  WAV_GRID = $wav_grid  NX_WAV=$wav_nx NX_WAV=$wav_ny \n";
+    $outstr .= "Grid Description: \n";
+    $outstr .= "  $desc_grid \n";
+    $outstr .= "Non-Default Options: \n";
+    my @ids = keys %newxml;
+    foreach my $id (sort @ids) {
+	my $value = $newxml{$id};
+	$outstr .=     "  $id: $value \n";
+    } 
+    print $fh_case $outstr;
+    $logger->info($outstr);
+    $fh_case->close();
+}	
 
-	foreach my $fhandle (@file_handles) {
-	    print $fhandle "Component set: longname \n";
-	    print $fhandle "  $compset_longname \n";
-	    print $fhandle "Component set Description: \n";
-	    print $fhandle " $desc_comp \n";
-	    print $fhandle "Grid: \n";
-	    print $fhandle "  $grid_longname \n";
-	    print $fhandle "  ATM_GRID = $atm_grid  NX_ATM=$atm_nx NY_ATM=$atm_ny \n";
-	    print $fhandle "  LND_GRID = $lnd_grid  NX_LND=$lnd_nx NX_LND=$lnd_ny \n";
-	    print $fhandle "  ICE_GRID = $ice_grid  NX_ICE=$ice_nx NX_ICE=$ice_ny \n";
-	    print $fhandle "  OCN_GRID = $ocn_grid  NX_OCN=$ocn_nx NX_OCN=$ocn_ny \n";
-	    print $fhandle "  ROF_GRID = $rof_grid  NX_ROF=$rof_nx NX_ROF=$rof_ny \n";
-	    print $fhandle "  GLC_GRID = $glc_grid  NX_GLC=$glc_nx NX_GLC=$glc_ny \n";
-	    print $fhandle "  WAV_GRID = $wav_grid  NX_WAV=$wav_nx NX_WAV=$wav_ny \n";
-	    print $fhandle "Grid Description: \n";
-	    print $fhandle "  $desc_grid \n";
-	    print $fhandle "Non-Default Options: \n";
-	    my @ids = keys %newxml;
-	    foreach my $id (sort @ids) {
-		my $value = $newxml{$id};
-		print $fhandle     "  $id: $value \n";
-	    } 
-	    print $fhandle "\n";
-	}
-	$fh_case->close();
-    }	
-}
 
 #-----------------------------------------------------------------------------------------------
 #                               Private routines
@@ -649,6 +671,7 @@ sub _setComponentAdditiveNewVal
     my ($current_val, $input_val) = @_;
 
     my $new_val;
+    # if $current_val is not empty
     if ($current_val !~ m/^\s*$/)  { 
 	$new_val = $current_val;
 	
@@ -658,19 +681,17 @@ sub _setComponentAdditiveNewVal
 	# Note that the '-' will be stripped off.
 	my @nameopts = split(/(?:^|\s)-/, $input_val);
 	my @curopts  = split(/(?:^|\s)-/, $current_val);
-	
+
 	# First item in each array will be space or empty string, so
 	# remove it with shift.
 	shift @nameopts;
 	shift @curopts;
-	
 	# Iterate through new options
 	foreach my $nameopt (@nameopts) {
-	    
 	    # Grab option name.
 	    my ($optname) = $nameopt =~ m/^(\w+)\s/;
+	    my $name_found = 0;
 	    if (defined $optname) {
-		my $name_found = 0;
 	    
 		# Check current options for values to replace.
 		foreach my $curopt (@curopts) {
@@ -680,10 +701,10 @@ sub _setComponentAdditiveNewVal
 			$new_val =~ s/$curopt/$nameopt /;
 		    }
 		}
-		# If the new option was not found in existing options, append it.
-		if ( ! $name_found) {
-		    $new_val = "$new_val -$nameopt";
-		}
+	    }
+	    # If the new option was not found in existing options, append it.
+	    if ( ! $name_found) {
+		$new_val = "$new_val -$nameopt";
 	    }
 	}
 
