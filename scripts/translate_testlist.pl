@@ -148,55 +148,68 @@ sub translate_testlist()
         $machineelement->setAttribute('name', $test->{machine});
         $machineelement->setAttribute('compiler', $test->{compiler});
         $machineelement->setAttribute('category', $test->{testtype});
+        # Spoke with alice, perhaps an options element??
+        my $optionselement = XML::LibXML::Element->new('options');
+        my $wallclock = XML::LibXML::Element->new('option');
+        $wallclock->setAttribute('name', 'wallclock');
+        $wallclock->appendText("2:00");
+        $optionselement->appendChild($wallclock);
+        my $pecount = XML::LibXML::Element->new('option');
+        $pecount->setAttribute('name', 'pecount');
+        $pecount->appendText("L");
+        $optionselement->appendChild($pecount);
+        $machineelement->appendChild($optionselement);
         $machineselement->appendChild($machineelement);
         $testelement->appendChild($machineselement);
         $testlistelement->appendChild($testelement);
     
     }
     
-    #my $x = $dom->toString(1);
-    #print $x . "\n";
     
-    #while(@sortedtestscopy)
-    my @testnodes = $testlistelement->findnodes("/testlist/test");
-    foreach my $testelement(@testnodes)
+    my @sortedtestscopy = @sortedtests;
+    while(@sortedtestscopy)
     {
-        #my $test = shift @sortedtestscopy;
-        #foreach my $testelement(@testnodes)
-        my @sortedtestscopy = @sortedtests;
-        while(@sortedtestscopy)
+        my $test = shift @sortedtestscopy;
+        #print "test: ", $test->repr(), "\n";
+        #print Dumper $test;
+        my @existingtestnode;
+        if(defined $test->{testmods})
         {
-            my $test = shift @sortedtestscopy;
-            print "test: ", $test->repr(), "\n";
-            #print Dumper $test;
-            my @existingtestnode;
-            if(defined $test->{testmods})
-            {
-                @existingtestnode = $dom->findnodes("//test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\' and \@testmods=\'$test->{testmods}\']/machines/machine[\@name=\'$test->{machine}\' and \@compiler=\'$test->{compiler}\' and \@category=\'$test->{testtype}\']");
-            }
-            else
-            {
-                @existingtestnode  = $dom->findnodes("//test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\']/machines/machine[\@name=\'$test->{machine}\' and \@compiler=\'$test->{compiler}\' and \@category=\'$test->{testtype}\']");
-            }
-            #print Dumper \@existingtestnode;
-            if(! @existingtestnode)
-            {
-                # find the <machines> element for this test node.
-                my @existingmachinesnodes = $testelement->findnodes("//test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\']/machines");
-                #print Dumper \@existingmachinesnodes;
-               
-                my $existingmachinesnode = $existingmachinesnodes[0];
-                my $machineelement = XML::LibXML::Element->new('machine');
-                $machineelement->setAttribute('name', $test->{machine});
-                $machineelement->setAttribute('compiler', $test->{compiler});
-                $machineelement->setAttribute('category', $test->{testtype});
-                $existingmachinesnode->appendChild($machineelement);
-                next;
-            }
+            @existingtestnode = $dom->findnodes("//test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\' and \@testmods=\'$test->{testmods}\']/machines/machine[\@name=\'$test->{machine}\' and \@compiler=\'$test->{compiler}\' and \@category=\'$test->{testtype}\']");
+        }
+        else
+        {
+            @existingtestnode  = $dom->findnodes("//test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\']/machines/machine[\@name=\'$test->{machine}\' and \@compiler=\'$test->{compiler}\' and \@category=\'$test->{testtype}\']");
+        }
+        #print Dumper \@existingtestnode;
+        if(! @existingtestnode)
+        {
+            # find the <machines> element for this test node.
+            my @existingmachinesnodes = $dom->findnodes("//test[\@name=\'$test->{testname}\' and \@grid=\'$test->{grid}\' and \@compset=\'$test->{compset}\']/machines");
+            #print Dumper \@existingmachinesnodes;
+           
+            my $existingmachinesnode = $existingmachinesnodes[0];
+            my $machineelement = XML::LibXML::Element->new('machine');
+
+            my $optionselement = XML::LibXML::Element->new('options');
+            my $wallclock = XML::LibXML::Element->new('option');
+            $wallclock->setAttribute('name', 'wallclock');
+            $wallclock->appendText("4:00");
+            $optionselement->appendChild($wallclock);
+            my $pecount = XML::LibXML::Element->new('option');
+            $pecount->setAttribute('name', 'pecount');
+            $pecount->appendText("L");
+            $optionselement->appendChild($pecount);
+            $machineelement->appendChild($optionselement);
+
+            $machineelement->setAttribute('name', $test->{machine});
+            $machineelement->setAttribute('compiler', $test->{compiler});
+            $machineelement->setAttribute('category', $test->{testtype});
+
+            $existingmachinesnode->appendChild($machineelement);
+            next;
         }
     }
-    #$x = $dom->toString(1);
-    #print $x . "\n";
     return $dom;
 }
 
@@ -211,6 +224,7 @@ sub writeXML
     #$newname .= "$dtformat.xml";
     $newname .= "new.xml";
     my $newfile = $oldpath . $newname;
+    print "writing $newfile\n";
     #my $newfile = "./testlist_allactive.$dtformat.xml";
     open my $NEWXML, ">", "$newfile" or die $?;
     my $newstring = $newdom->toString(1);
@@ -220,12 +234,13 @@ sub writeXML
 sub main()
 {
     my @origfilepaths = (
-                           #"../../components/rtm/cime_config/testdefs/testlist_rtm.xml",
-                           #"../../components/clm/cime_config/testdefs/testlist_clm.xml",
-                           #"../../components/cice/cime_config/testdefs/testlist_cice.xml",
+                           "../cime_config/cesm/allactive/testlist_allactive.xml",
+                           "../../components/rtm/cime_config/testdefs/testlist_rtm.xml",
+                           "../../components/clm/cime_config/testdefs/testlist_clm.xml",
+                           "../../components/cice/cime_config/testdefs/testlist_cice.xml",
                            "../../components/pop/cime_config/testdefs/testlist_pop.xml",
-                           #"../../components/cism/cime_config/testdefs/testlist_cism.xml",
-                           #"../../components/cam/cime_config/testdefs/testlist_cam.xml",
+                           "../../components/cism/cime_config/testdefs/testlist_cism.xml",
+                           "../../components/cam/cime_config/testdefs/testlist_cam.xml",
                         );
     foreach my $oldfile(@origfilepaths)
     {
