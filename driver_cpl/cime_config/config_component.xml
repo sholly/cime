@@ -432,39 +432,6 @@
     We will not document this further in this guide.</desc>
   </entry> 
 
-  <entry id="DOUT_S_SAVE_EVERY_NTH_RESTART_FILE_SET"> 
-    <type>integer</type>
-    <default_value>0</default_value>
-    <group>run_data_archive</group>
-    <file>env_run.xml</file>
-    <desc>Save every Nth set of restart files and delete all others
-      If value is greater than 0, then only save the nth restart set in the $DOUT_S_ROOT/$CASE/rest location. 
-      Always preserve the most recent restart set regardless.</desc>
-  </entry> 
-
-  <entry id="DOUT_S_SAVE_ALL_ON_DISK"> 
-    <type>logical</type>
-    <valid_values>TRUE,FALSE</valid_values>
-    <default_value>TRUE</default_value>
-    <group>run_data_archive</group>
-    <file>env_run.xml</file>
-    <desc>logical to save contents of the short term archive on disk
-      If TRUE, create hardlinks from the short term archive $DOUT_S_ROOT.locked/$CASE
-      directory to the $DOUT_S_ROOT/$CASE directory.</desc>
-  </entry> 
-
-  <entry id="DOUT_S_SAVE_HISTORY_FILES"> 
-    <type>logical</type>
-    <valid_values>TRUE,FALSE</valid_values>
-    <default_value>FALSE</default_value>
-    <group>run_data_archive</group>
-    <file>env_run.xml</file>
-    <desc>Logical to save history time slice files after the variable time series have been generated
-    If TRUE, none of the history time slice files will be deleted from the $DOUT_S_ROOT/$CASE location after the
-    variable time series files are successfully generated. *WARNING* setting this option to TRUE can
-    more than double the disk space used by the output data for a given job.</desc>
-  </entry> 
-
   <entry id="DOUT_L_MS"> 
     <type>logical</type>
     <valid_values>TRUE,FALSE</valid_values>
@@ -482,26 +449,6 @@
     <file>env_run.xml</file>
     <desc></desc>
   </entry>
-
-  <entry id="DOUT_L_HTAR"> 
-    <type>logical</type>
-    <valid_values>TRUE,FALSE</valid_values>
-    <default_value>FALSE</default_value>
-    <group>run_data_archive</group>
-    <file>env_run.xml</file>
-    <desc>If true, DOUT_L_HTAR the long-term archiver will store history data in annual tar files. 
-    Not currently implemented</desc>
-  </entry> 
-
-  <entry id="DOUT_L_SAVE_ALL_ON_DISK"> 
-    <type>logical</type>
-    <valid_values>TRUE,FALSE</valid_values>
-    <default_value>TRUE</default_value>
-    <group>run_data_archive</group>
-    <file>env_run.xml</file>
-    <desc>Save contents of short term archive on disk after the long term archiver has successfully completed
-    If TRUE, this keeps the output data in DOUT_S_ROOT on disk after the long term (lt_archive.sh) archiver is run.</desc>
-  </entry> 
 
   <!-- ===================================================================== -->
   <!-- definitions machines specific -->
@@ -1056,6 +1003,14 @@
     <group>build_grid</group>
     <file>env_build.xml</file>
     <desc>number of ice cells in j direction - DO NOT EDIT (for experts only)</desc>
+  </entry>
+
+  <entry id="ICE_NCAT"> 
+    <type>integer</type>
+    <default_value>1</default_value>
+    <group>build_grid</group>
+    <file>env_build.xml</file>
+    <desc>number of ice thickness categories - DO NOT EDIT (set by CICE configure)</desc>
   </entry>
 
   <entry id="ROF_GRID">
@@ -2312,6 +2267,14 @@
     <desc>pio number of io tasks</desc>
   </entry>
 
+  <entry id="PIO_REARRANGER">
+    <type>integer</type>
+    <default_value>2</default_value>
+    <group>run_pio</group>
+    <file>env_run.xml</file>
+    <desc>pio rearranger choice box=1, subset=2 </desc>
+  </entry>
+
   <entry id="PIO_TYPENAME">
     <type>char</type>
     <valid_values>netcdf,pnetcdf,netcdf4p,netcdf4c,default</valid_values>
@@ -2334,7 +2297,7 @@
     <default_value>-1</default_value>
     <group>run_pio</group>
     <file>env_run.xml</file>
-    <desc>pio blocksize</desc>
+    <desc>pio blocksize for box decompositions</desc>
   </entry>
 
   <entry id="PIO_BUFFER_SIZE_LIMIT">
@@ -2342,7 +2305,7 @@
     <default_value>-1</default_value>
     <group>run_pio</group>
     <file>env_run.xml</file>
-    <desc>pio buffer size limit</desc>
+    <desc>pio buffer size limit for pnetcdf output</desc>
   </entry>
 
   <entry id="OCN_PIO_STRIDE">
@@ -2351,6 +2314,14 @@
     <group>run_pio</group>
     <file>env_run.xml</file>
     <desc>pio stride</desc>
+  </entry>
+
+  <entry id="OCN_PIO_REARRANGER">
+    <type>integer</type>
+    <default_value>-99</default_value>
+    <group>run_pio</group>
+    <file>env_run.xml</file>
+    <desc>pio rearranger choice box=1, subset=2 </desc>
   </entry>
 
   <entry id="OCN_PIO_ROOT">
@@ -2386,6 +2357,14 @@
     <desc>pio stride</desc>
   </entry>
 
+  <entry id="LND_PIO_REARRANGER">
+    <type>integer</type>
+    <default_value>-99</default_value>
+    <group>run_pio</group>
+    <file>env_run.xml</file>
+    <desc>pio rearranger choice box=1, subset=2 </desc>
+  </entry>
+
   <entry id="LND_PIO_ROOT">
     <type>integer</type>
     <default_value>-99</default_value>
@@ -2417,6 +2396,14 @@
     <group>run_pio</group>
     <file>env_run.xml</file>
     <desc>pio stride</desc>
+  </entry>
+
+  <entry id="ROF_PIO_REARRANGER">
+    <type>integer</type>
+    <default_value>-99</default_value>
+    <group>run_pio</group>
+    <file>env_run.xml</file>
+    <desc>pio rearranger choice box=1, subset=2 </desc>
   </entry>
 
   <entry id="ROF_PIO_ROOT">
@@ -2452,6 +2439,14 @@
     <desc>pio stride</desc>
   </entry>
 
+  <entry id="ICE_PIO_REARRANGER">
+    <type>integer</type>
+    <default_value>-99</default_value>
+    <group>run_pio</group>
+    <file>env_run.xml</file>
+    <desc>pio rearranger choice box=1, subset=2 </desc>
+  </entry>
+
   <entry id="ICE_PIO_ROOT">
     <type>integer</type>
     <default_value>-99</default_value>
@@ -2483,6 +2478,14 @@
     <group>run_pio</group>
     <file>env_run.xml</file>
     <desc>pio stride</desc>
+  </entry>
+
+  <entry id="ATM_PIO_REARRANGER">
+    <type>integer</type>
+    <default_value>-99</default_value>
+    <group>run_pio</group>
+    <file>env_run.xml</file>
+    <desc>pio rearranger choice box=1, subset=2 </desc>
   </entry>
 
   <entry id="ATM_PIO_ROOT">
@@ -2518,6 +2521,14 @@
     <desc>pio stride</desc>
   </entry>
 
+  <entry id="CPL_PIO_REARRANGER">
+    <type>integer</type>
+    <default_value>-99</default_value>
+    <group>run_pio</group>
+    <file>env_run.xml</file>
+    <desc>pio rearranger choice box=1, subset=2 </desc>
+  </entry>
+
   <entry id="CPL_PIO_ROOT">
     <type>integer</type>
     <default_value>-99</default_value>
@@ -2551,6 +2562,14 @@
     <desc>pio stride</desc>
   </entry>
 
+  <entry id="GLC_PIO_REARRANGER">
+    <type>integer</type>
+    <default_value>-99</default_value>
+    <group>run_pio</group>
+    <file>env_run.xml</file>
+    <desc>pio rearranger choice box=1, subset=2 </desc>
+  </entry>
+
   <entry id="GLC_PIO_ROOT">
     <type>integer</type>
     <default_value>-99</default_value>
@@ -2582,6 +2601,14 @@
     <group>run_pio</group>
     <file>env_run.xml</file>
     <desc>pio stride</desc>
+  </entry>
+
+  <entry id="WAV_PIO_REARRANGER">
+    <type>integer</type>
+    <default_value>-99</default_value>
+    <group>run_pio</group>
+    <file>env_run.xml</file>
+    <desc>pio rearranger choice box=1, subset=2 </desc>
   </entry>
 
   <entry id="WAV_PIO_ROOT">
@@ -2778,6 +2805,15 @@
       cpl_seq_option flags take it's place.
       TIGHT coupling makes no sense with the OPTION5 and OPTION6 flags.
     </desc>
+  </entry>
+
+  <entry id="CPL_I2O_PER_CAT">
+    <type>logical</type>
+    <valid_values>TRUE,FALSE</valid_values>  
+    <default_value>FALSE</default_value> 
+    <group>run_coupling</group>
+    <file>env_run.xml</file>
+    <desc>determine if per ice thickness category fields are passed from ice to ocean - DO NOT EDIT (set by POP build-namelist)</desc>
   </entry>
 
   <entry id="CCSM_BGC"> 
