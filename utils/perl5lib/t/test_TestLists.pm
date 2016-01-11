@@ -44,14 +44,36 @@ sub findTestsForFile() : Test(3)
     
     my $testlists = Testing::TestLists->new(cimeroot => "./t/mocks_TestLists/mockcimeroot");
     
-    #my %params = ( machine => 'yellowstone' );
-    #my @cimetestlists = $testlists->findTestsForFile($testlists->{allactive}, \%params);
-    #print Dumper \@cimetestlists;
+    my %params = ( machine => 'yellowstone' );
+    my @cimetestlist = $testlists->findTestsForFile($testlists->{allactive}, \%params);
+    foreach my $ct(@cimetestlist)
+    {
+        ok($ct->{machine} eq 'yellowstone');
+    }
 
 
-    #%params = ( compset => 'B1850', machine => 'yellowstone', compiler => 'intel');
-    #@cimetestlists = $testlists->findTestsForFile($testlists->{allactive}, \%params);
+    %params = ( compset => 'B1850', machine => 'yellowstone', compiler => 'intel');
+    @cimetestlist = $testlists->findTestsForFile($testlists->{allactive}, \%params);
+    foreach my $ct(@cimetestlist)
+    {
+        ok($ct->{compset} eq 'B1850');
+        ok($ct->{machine} eq 'yellowstone');
+        ok($ct->{compiler} eq 'intel');
+    }
     %params = (  machine => 'yellowstone', compiler => 'intel');
+    @cimetestlist = $testlists->findTestsForFile($testlists->{allactive}, \%params);
+    foreach my $ct(@cimetestlist)
+    {
+        ok($ct->{machine} eq 'yellowstone');
+        ok($ct->{compiler} eq 'intel');
+    }
+    %params = (  category => 'prebeta');
+    @cimetestlist = $testlists->findTestsForFile($testlists->{allactive}, \%params);
+    foreach my $ct(@cimetestlist)
+    {
+        ok($ct->{category} eq 'prebeta');
+    }
+    %params = ();
     @cimetestlists = $testlists->findTestsForFile($testlists->{allactive}, \%params);
 }
 1;
