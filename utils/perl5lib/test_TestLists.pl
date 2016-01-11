@@ -26,8 +26,6 @@ BEGIN {
 	use_ok("Test::Exception"); 
 }
  
-my $machine;
-GetOptions("machine=s" => \$machine);
 
 require Testing::CIMETest;
 require Testing::TestLists;

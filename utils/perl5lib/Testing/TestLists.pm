@@ -38,17 +38,38 @@ sub new
     # such that all we are concerned about is CESM. 
     $self->{allactive} = $self->{cimeroot} . "/cime_config/cesm/allactive/testlist_allactive.xml";
     $self->{cam} = $self->{cimeroot} . "/../components/cam/cime_config/testdefs/testlist_cam.xml";
-    $self->{cice} = $self->{cimeroot} . "/../components/cice/cime_config/testdefs/testlist_cam.xml";
+    $self->{cice} = $self->{cimeroot} . "/../components/cice/cime_config/testdefs/testlist_cice.xml";
     $self->{cism} = $self->{cimeroot} . "/../components/cism/cime_config/testdefs/testlist_cism.xml";
     $self->{clm} = $self->{cimeroot} . "/../components/clm/cime_config/testdefs/testlist_clm.xml";
     $self->{pop} = $self->{cimeroot} . "/../components/pop/cime_config/testdefs/testlist_pop.xml";
     $self->{rtm} = $self->{cimeroot} . "/../components/rtm/cime_config/testdefs/testlist_rtm.xml";
-    my @components = ( "allactive", "cam", "cice", "cism", "clm", "pop", "rtm");
+    my @components = qw( allactive cam cice cism clm pop rtm );
     $self->{components} = \@components;
 	
 	bless $self, $class;
-    #print Dumper $self;
 	return ($self);
+}
+
+sub findTests()
+{
+    my $self = shift;
+    my $component = shift;
+    my $params = shift;
+    
+    my @tests;
+    if(defined $component)
+    {
+        @tests = $self->findTestsForFile($component, $params);
+    }
+    else
+    {
+        foreach my $comp (@{$self->{components}})
+        {
+            my @comptests = $self->findTestsForComp($comp, $params);
+            push(@tests, @comptests);
+        }
+    }
+    return @tests;
 }
 
 #-----------------------------------------------------------------------------------------------
@@ -58,12 +79,13 @@ sub new
 # # TODO: CIMETest is really a bad name for what are simple little data storage objects, 
 # perhaps a better name is appropriate? 
 #-----------------------------------------------------------------------------------------------
-sub findTestsForFile()
+sub findTestsForComp()
 {
     my $self = shift;
-    my $filetoquery = shift;
+    my $comp = shift;
     my $params = shift;
     
+    my $filetoquery = $self->{$comp};
     my @cimetestlist;
 
     # The beginning of the XPATH query, we always want to search for '/testlist/test'

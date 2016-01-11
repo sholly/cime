@@ -1,0 +1,987 @@
+<?xml version="1.0"?>
+<testlist>
+  <test name="ERI" grid="T62_g16" compset="CECO" testmods="pop/ecosys">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prealpha">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI" grid="T62_g16" compset="CECO" testmods="pop/ciso">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop_MARBL">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI" grid="T62_g37" compset="G" testmods="pop/cice">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prealpha">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI" grid="f19_g16_rx1" compset="G" testmods="pop/cice">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_cice">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS" grid="T62_g16" compset="C" testmods="pop/default">
+    <machines>
+      <machine name="eastwind" compiler="pgi" category="aux_rasm">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="evergreen" compiler="intel" category="aux_rasm">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="olympus" compiler="pgi" category="aux_rasm">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_rasm">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_science">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prealpha">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS" grid="T62_s11" compset="C" testmods="pop/default">
+    <machines>
+      <machine name="bluewaters" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="edison" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="eos" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS" grid="T62_g16" compset="CECO" testmods="pop/ecosys">
+    <machines>
+      <machine name="hobart" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="hobart" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS" grid="T62_g37" compset="CECO" testmods="pop/ecosys">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_pop_MARBL">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS" grid="T62_g37" compset="CECO" testmods="pop/ecosys_restore_gx3v7">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS" grid="T62_g37" compset="CECO" testmods="pop/ciso_transient">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop_MARBL">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS" grid="T62_g16" compset="G" testmods="pop/cice">
+    <machines>
+      <machine name="hobart" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="hobart" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS" grid="T62_g37" compset="G" testmods="pop/cice">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="prealpha">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS" grid="T62_s11" compset="G" testmods="pop/cice">
+    <machines>
+      <machine name="hobart" compiler="nag" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS" grid="T62_t12" compset="G" testmods="pop/cice">
+    <machines>
+      <machine name="bluewaters" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="edison" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="eos" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS" grid="T62_g16" compset="GECO" testmods="pop/cice_ecosys">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="prealpha">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS" grid="T62_g37" compset="GECO" testmods="pop/cice_ecosys">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS" grid="T62_g37" compset="GECO" testmods="pop/cice_ciso">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop_MARBL">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS" grid="f19_g16_rx1" compset="GECO" testmods="pop/cice">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_cice">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_D" grid="f19_g16_rx1" compset="GECO" testmods="pop/cice_ecosys">
+    <machines>
+      <machine name="edison" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="hobart" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="hobart" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_D_Ld3" grid="T62_g37" compset="CECO" testmods="pop/ciso_abio_dic_dic14">
+    <machines>
+      <machine name="userdefined" compiler="gnu" category="aux_pop_obgc_se">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_E_Lm3" grid="T62_g16" compset="CECO" testmods="pop/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_esmf">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_IOP" grid="T62_g16" compset="CIAF" testmods="pop/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prealpha">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_IOP" grid="T62_s11" compset="G" testmods="pop/cice">
+    <machines>
+      <machine name="hobart" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_IOP" grid="T62_g16" compset="GIAF" testmods="pop/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="prealpha">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld3" grid="T62_g37" compset="C" testmods="pop/default">
+    <machines>
+      <machine name="userdefined" compiler="gnu" category="aux_pop_obgc_se">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld3" grid="T62_g37" compset="CECO" testmods="pop/ecosys_restore_gx3v7">
+    <machines>
+      <machine name="userdefined" compiler="gnu" category="aux_pop_obgc_se">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld3" grid="T62_g37" compset="CECO" testmods="pop/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_testsystem">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld30" grid="T62_g37" compset="C" testmods="pop/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld30" grid="T62_g37" compset="C" testmods="pop/abio_dic_dic14">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld30" grid="T62_g37" compset="C" testmods="pop/abio_dic_dic14_transient">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld30" grid="T62_g37" compset="CECO" testmods="pop/ciso_abio_dic_dic14">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld30" grid="T62_g37" compset="CECO" testmods="pop/ecosys">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld30" grid="T62_g37" compset="CECO" testmods="pop/abio_dic_dic14">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld30" grid="T62_g37" compset="CECO" testmods="pop/ciso">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld30" grid="T62_g37" compset="CECO" testmods="pop/ciso_transient">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld30" grid="T62_g37" compset="G" testmods="pop/presaero">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld30" grid="T62_g37" compset="G" testmods="pop/abio_dic_dic14_presaero">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld30" grid="T62_g37" compset="GECO" testmods="pop/ecosys">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld30" grid="T62_g37" compset="GECO" testmods="pop/abio_dic_dic14">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld30" grid="T62_g37" compset="GECO" testmods="pop/ciso">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld30" grid="T62_g37" compset="GECO" testmods="pop/ciso_abio_dic_dic14">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld5_D" grid="T62_g16" compset="CECO" testmods="pop/ciso">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop_MARBL">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld5_D" grid="T62_g37" compset="CECO" testmods="pop/ciso_abio_dic_dic14">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld5_D" grid="T62_g37" compset="GECO" testmods="pop/ciso_abio_dic_dic14">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld5_D" grid="T62_g37" compset="GECO" testmods="pop/cice_ciso">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop_MARBL">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Lm3" grid="T62_g16" compset="C" testmods="pop/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Lm3" grid="T62_g16" compset="CECO" testmods="pop/ecosys">
+    <machines>
+      <machine name="bluewaters" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="edison" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="eos" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Lm3" grid="T62_g16" compset="CIAF" testmods="pop/default">
+    <machines>
+      <machine name="hobart" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Lm3" grid="T62_g37" compset="G" testmods="pop/cice">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_cice">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Lm3_E" grid="T62_g37" compset="G" testmods="pop/cice">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_esmf">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_PT_Lm3" grid="T62_g16" compset="GIAF" testmods="pop/cice">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ICP" grid="T62_g16" compset="G" testmods="pop/cice">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_scripts">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="OCP" grid="T62_g16" compset="CECO">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_scripts">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PET_D_Ld2" grid="T62_g37" compset="C1DECO" testmods="pop/ecosys_restore_gx3v7">
+    <machines>
+      <machine name="userdefined" compiler="gnu" category="aux_pop_obgc_se">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PET_D_Ld2" grid="T62_g37" compset="CECO" testmods="pop/ecosys_restore_gx3v7">
+    <machines>
+      <machine name="userdefined" compiler="gnu" category="aux_pop_obgc_se">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PET_PT" grid="T62_g16" compset="G" testmods="pop/cice">
+    <machines>
+      <machine name="bluewaters" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="edison" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="eos" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PET_PT" grid="f45_g37_rx1" compset="G" testmods="pop/cice">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_cice">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PFS" grid="T62_g16" compset="C">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="csltiming">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PFS" grid="T62_g16" compset="CECO">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="csltiming">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PFS" grid="T62_g16" compset="G">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="csltiming">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PFS" grid="T62_g16" compset="GECO">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="csltiming">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PMT_P120x1" grid="T62_g16" compset="GECO" testmods="pop/cice_ecosys">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="T62_t12" compset="C">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="T62_g16" compset="GECO">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS" grid="T62_g16" compset="CECO" testmods="pop/ecosys">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_drv">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D" grid="T62_g37" compset="CECO" testmods="pop/ecosys">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop_MARBL">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D" grid="T62_s11" compset="G" testmods="pop/cice">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D" grid="T62_g37" compset="GECO" testmods="pop/ecosys">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D" grid="T62_g37" compset="GECO" testmods="pop/cice_ecosys">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop_MARBL">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_DE" grid="T62_g16" compset="CIAF" testmods="pop/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_esmf">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld2" grid="T62_g37" compset="CECO" testmods="pop/ecosys">
+    <machines>
+      <machine name="userdefined" compiler="gnu" category="aux_pop_obgc_se">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_P15x1_D" grid="T62_g37" compset="CECO" testmods="pop/ecosys">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_pop">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+</testlist>

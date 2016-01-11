@@ -1,0 +1,3869 @@
+<?xml version="1.0"?>
+<testlist>
+  <test name="CME_Ld1" grid="f10_f10" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_testsystem">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="CME_Ld5" grid="f10_f10" compset="ICN">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="CME_Ly4" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/monthly">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="CME_N2_Ld5" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="CME_N2_Ld5" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/drydepnomegan">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="CME_P48x1_Ly5" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI" grid="f19_g16_gl5" compset="IG1850CLM45">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D" grid="f19_g16_gl5" compset="IG1850CN">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D" grid="f10_f10" compset="IHISTCN" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="T31_g37" compset="I1850" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="f19_g16" compset="I1850CLM45CN">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="f19_g16" compset="I1850CLM45CN" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="f19_g16" compset="I1850CLM45CN" testmods="clm/drydepnomegan">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="f19_g16" compset="I1850CN" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="T31_g37" compset="ICLM45" testmods="clm/SNICARFRC">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="f09_g16" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="f10_f10" compset="ICLM45BGC">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="f10_f10" compset="ICLM45BGC" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="f10_f10" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="f19_g16" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="ne30_g16" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="ne30_g16" compset="ICLM45BGC" testmods="clm/vrtlay">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="1x1_camdenNJ" compset="ICLM45CNTEST" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_testsystem">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="f10_f10" compset="ICRUCLM50BGC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="f10_f10" compset="ICRUCLM50BGC" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9" grid="f19_g16" compset="ICRUCLM50BGC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9_P24x1" grid="T31_g37" compset="I1850CLM45" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9_P24x1" grid="f10_f10" compset="ICLM45" testmods="clm/SNICARFRC">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9_P24x1" grid="f10_f10" compset="ICLM45BGC" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_D_Ld9_P24x1" grid="f10_f10" compset="ICRUCLM50BGC" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld5" grid="f19_g16" compset="ITEST" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="goldbach" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="goldbach" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="hopper" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld5" grid="f45_g37" compset="ITEST" testmods="clm/40default">
+    <machines>
+      <machine name="goldbach" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="goldbach" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="janus" compiler="intel" category="prealpha">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="janus" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="f09_g16" compset="I1850CRUCLM45BGC" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="f09_g16" compset="I1850CRUCLM45BGC" testmods="clm/drydepnomegan">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="f45_g37" compset="I4804" testmods="clm/40default">
+    <machines>
+      <machine name="janus" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="ne30_g16" compset="I4804" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="f09_g16" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="f09_g16" compset="ICLM45BGC" testmods="clm/cn_conly">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="f09_g16" compset="ICLM45BGC" testmods="clm/drydepnomegan">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="f10_f10" compset="ICLM45BGC">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="f10_f10" compset="ICLM45BGC" testmods="clm/drydepnomegan">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="f19_g16" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="f19_g16" compset="ICLM45BGC" testmods="clm/drydepnomegan">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="1x1_camdenNJ" compset="ICLM45CNTEST" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_testsystem">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="f10_f10" compset="ICRUCLM50BGC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="f10_f10" compset="ICRUCLM50BGC" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_Ld9" grid="f19_g16" compset="ICRUCLM50BGC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_N2_Ld9" grid="f19_g16" compset="ICRUCLM45BGCCROP">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERI_N2_Ld9" grid="f19_g16" compset="ICRUCLM45BGCCROP" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP" grid="f19_g16_gl5" compset="IG1850CLM45">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D" grid="f10_f10" compset="IHISTCLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="goldbach" compiler="nag" category="prealpha">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D" grid="f10_f10" compset="IHISTCLM45BGC" testmods="clm/decStart">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D" grid="f19_g16" compset="IRCP85CN" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld3_P15x2" grid="f10_f10" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm_short">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm_short">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm_short">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f10_f10" compset="I" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f10_f10" compset="ICLM45" testmods="clm/decStart">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f10_f10" compset="ICLM45" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f10_f10" compset="ICLM45BGC" testmods="clm/rootlit">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f10_f10" compset="ICLM45BGC" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="goldbach" compiler="nag" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f10_f10" compset="ICLM45BGC" testmods="clm/NoVSNoNI">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f10_f10" compset="ICLM45BGC" testmods="clm/ciso">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f19_g16" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="ne30_g16" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="goldbach" compiler="nag" category="prealpha">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f10_f10" compset="ICLM45BGCCROP" testmods="clm/allActive">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f19_g16_gl5" compset="ICLM45GLCMEC" testmods="clm/glcMEC">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f19_g16_gl5" compset="ICLM45GLCMEC" testmods="clm/glcMEC_changeFlags">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f09_g16" compset="ICLM45VIC" testmods="clm/vrtlay">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f10_f10" compset="ICLM45VIC" testmods="clm/vrtlay">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f10_f10" compset="ICN" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="hobart" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="1x1_smallvilleIA" compset="ICNCROP" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="eos" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="hopper" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="titan" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="hcru_hcru" compset="ICRUCLM45BGC">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f19_g16" compset="ICRUCLM50BGC" testmods="clm/fire_emis">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f19_g16" compset="ICRUCLM50BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="hcru_hcru" compset="ICRUCN" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f19_g16" compset="IRCP85CLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5" grid="f19_g16" compset="IRCP85CLM45BGC" testmods="clm/drydepnomegan">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5_P24x1" grid="f10_f10" compset="I1850CLM45" testmods="clm/o3">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5_P24x1" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/ciso">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_Ld5_P24x1" grid="f10_f10" compset="ICLM45BGC" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_P144x1_Ld211" grid="f10_f10" compset="ICNCROP" testmods="clm/crop">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_P15x2_Ld3" grid="f10_f10" compset="ICRUCLM50BGC" testmods="clm/flexibleCN">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_P15x2_Ld3" grid="f10_f10" compset="ICRUCLM50BGC" testmods="clm/limit_river_withdraw">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_P15x2_Ld3" grid="f10_f10" compset="ICRUCLM50BGC" testmods="clm/luna">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_P15x2_Ld30" grid="f10_f10" compset="ICRUCLM50BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_P24x1" grid="f10_f10" compset="IHISTCLM45BGC" testmods="clm/decStart">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_P48x24_Ld3" grid="ne30_g16" compset="ICN" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_P4x24_Ld5" grid="ne30_g16" compset="ICN" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_P4x30_Ld5" grid="ne30_g16" compset="ICN" testmods="clm/40default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_D_P64x16_Ld3" grid="ne30_g16" compset="ICN" testmods="clm/40default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_E_Ld5" grid="f19_g16" compset="I1850" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_E_Ld5" grid="f19_g16" compset="I1850CRUCLM45CN" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f09_g16" compset="I" testmods="clm/40default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_science">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/drydepnomegan">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f19_g16" compset="I1850CLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f19_g16" compset="I1850CLM45CNF" testmods="clm/default">
+    <machines>
+      <machine name="goldbach" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f10_f10" compset="I1850CN" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="hobart" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f45_g37" compset="I1850CN" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f10_f10" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_testsystem">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f19_g16" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f09_g16" compset="ICLM45VIC" testmods="clm/vrtlay">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f10_f10" compset="ICLM45VIC" testmods="clm/decStart">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f09_g16" compset="ICN">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_science">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f19_g16" compset="ICNCROP" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f19_g16" compset="ICRUCLM50BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f19_g16" compset="IHISTCN" testmods="clm/40default">
+    <machines>
+      <machine name="bluewaters" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="edison" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="eos" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="hopper" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="titan" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5" grid="f19_g16" compset="ITEST" testmods="clm/40default">
+    <machines>
+      <machine name="eastwind" compiler="pgi" category="aux_rasm">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="evergreen" compiler="intel" category="aux_rasm">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="olympus" compiler="pgi" category="aux_rasm">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_rasm">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5_P24x1" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/ciso">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5_P24x1" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5_P24x1" grid="f10_f10" compset="ICLM45BGC" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ld5_P24x1" grid="f10_f10" compset="ICRUCLM50BGC" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Lm20" grid="1x1_smallvilleIA" compset="ICLM45BGCCROP" testmods="clm/monthly">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Lm3" grid="1x1_numaIA" compset="ICNCROP" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="hobart" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Lm3" grid="f19_g16_gl5" compset="IGRCP60CN">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Lm40" grid="1x1_numaIA" compset="ICLM45BGCCROP" testmods="clm/monthly">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Lm54" grid="1x1_numaIA" compset="ICLM45BGCCROP" testmods="clm/cropMonthOutput">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ln96" grid="ne120_g16" compset="I1850CN">
+    <machines>
+      <machine name="edison" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="hopper" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ly20" grid="1x1_numaIA" compset="ICLM45BGCDVCROP" testmods="clm/cropMonthOutput">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ly5" grid="1x1_numaIA" compset="ICLM45BGCCROP" testmods="clm/monthly">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_Ly5" grid="f10_f10" compset="ICLM45BGCCROP" testmods="clm/irrig_o3_reduceOutput">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P15x2_D" grid="f10_f10" compset="ICLM45BGC" testmods="clm/snowlayers_12">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P15x2_D_Ld5" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/ciso">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prealpha">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P15x2_D_Ld5" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_testsystem">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P15x2_Lm13" grid="f10_f10" compset="IHISTCLM45BGC" testmods="clm/monthly">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P15x2_Lm25" grid="f10_f10" compset="ICLM45BGCDVCROP" testmods="clm/monthly">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P15x2_Lm36" grid="f10_f10" compset="ICLM45BGCCROP" testmods="clm/irrig_o3_reduceOutput">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P15x2_Lm36" grid="f10_f10" compset="ICLM45BGCCROP" testmods="clm/irrigOn_reduceOutput">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P180x2_D_Ld5" grid="f19_g16" compset="I1850CLM45" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prealpha">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P180x2_D_Ld5" grid="f19_g16" compset="ICLM45BGCDVCROP" testmods="clm/crop">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P180x2_Ld5" grid="f19_g16" compset="I1850" testmods="clm/40default">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P180x2_Ld5" grid="f19_g16" compset="I1850CN" testmods="clm/40default">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P192x1_Ld211" grid="f19_g16" compset="ICNDVCROP" testmods="clm/crop">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P192x2_D_Ld5" grid="f19_g16" compset="ICLM45BGCDVCROP" testmods="clm/crop">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P192x2_Ld5" grid="f19_g16" compset="I1850" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P192x2_Ld5" grid="f19_g16" compset="I1850CLM45" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P192x2_Ld5" grid="f19_g16" compset="I1850CN" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P24x2_D_Ld5" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/ciso">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P24x2_Lm25" grid="f10_f10" compset="ICLM45BGCDVCROP" testmods="clm/monthly">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P24x2_Lm36" grid="f10_f10" compset="ICLM45BGCCROP" testmods="clm/irrigOn_reduceOutput">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERP_P48x1_Ly5" grid="f10_f10" compset="IHISTCRUCLM45BGC" testmods="clm/monthly">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_D" grid="f19_g16_gl5" compset="IGRCP26CN" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="hobart" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_D_Ld10" grid="T31_g37_gl5" compset="IGHISTCLM45" testmods="clm/glcMEC_decrease">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_D_Ld3" grid="f10_f10" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm_short">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm_short">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm_short">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_D_Ld3" grid="f10_f10" compset="ICRUCLM50BGC" testmods="clm/deepsoil_bedrock">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_D_Ld5" grid="f10_f10" compset="IMCRUCLM50BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_D_Ld5_Mmpi-serial" grid="1x1_mexicocityMEX" compset="I1PTCLM45" testmods="clm/default">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_D_Ld5_Mmpi-serial" grid="1x1_brazil" compset="ICLM45ED" testmods="clm/edTest">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_D_P112x1_Ld211" grid="f10_f10" compset="ICNCROP" testmods="clm/crop">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_E_Ld9" grid="f45_g37" compset="I" testmods="clm/40default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld5" grid="1x1_vancouverCAN" compset="I1PT" testmods="clm/40default">
+    <machines>
+      <machine name="hobart" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld5" grid="1x1_vancouverCAN" compset="I1PTCLM45" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld5" grid="1x1_vancouverCAN" compset="I1PTCLM50" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ld5_Mmpi-serial" grid="1x1_mexicocityMEX" compset="I1PTCLM45" testmods="clm/default">
+    <machines>
+      <machine name="goldbach" compiler="nag" category="prealpha">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Lm3" grid="f19_g16_gl5" compset="IGRCP60CN">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Ly5_P60x1" grid="f10_f10" compset="IHISTCLM45BGCCROP" testmods="clm/cropMonthOutput">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_Mmpi-serial_P1x1_Ld5" grid="1x1_brazil" compset="I" testmods="clm/40default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_scripts">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="ERS_P192x1_Ld211" grid="f19_g16" compset="ICNDVCROP" testmods="clm/crop">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="LAR" grid="T31_g37" compset="ICLM45BGC">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_scripts">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="LII_D" grid="f10_f10" compset="ICLM45BGCCROP" testmods="clm/crop">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="LII_D_Ld3" grid="f19_g16_gl5" compset="IG1850CLM45" testmods="clm/glcMEC_spunup_1way">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="NCK_Ld1" grid="f10_f10" compset="ICRUCLM45" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prealpha">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="NCK_Ld5" grid="f10_f10" compset="I" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prealpha">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PEM_D" grid="f19_g16_gl5" compset="IG1850CLM45">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PEM_D" grid="f19_g16_gl5" compset="IG1850CLM45" testmods="clm/glcMEC_increase">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PEM_D_Ld5" grid="ne30_g16" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PEM_Ld1" grid="f10_f10" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_testsystem">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PEM_Ld1" grid="f10_f10" compset="ICLM45BGCCROP" testmods="clm/crop">
+    <machines>
+      <machine name="goldbach" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PEM_Lm25" grid="f10_f10" compset="ICLM45BGCCROP" testmods="clm/cropMonthOutput">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PET_P15x2_D" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/interp_f19_noncrop">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PET_P24x2_Lm13" grid="f19_g16" compset="IHISTCLM45BGC" testmods="clm/monthly">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PFS" grid="ne30_g16" compset="ICLM45BGC">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="csltiming">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="PFS" grid="hcru_hcru" compset="ICRUCLM45BGC">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_scripts">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="1x1_brazil" compset="I">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f02_g16" compset="I1850">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f05_g16" compset="I1850">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16" compset="I1850">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f10_f10" compset="I1850">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f45_g37" compset="I1850">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne120_g16" compset="I1850">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne16_g37" compset="I1850">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne30_g16" compset="I1850">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne60_g16" compset="I1850">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="1x1_tropicAtl" compset="I1850CLM45">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f19_g16" compset="I1850CLM45">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16" compset="I1850CLM45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="1x1_tropicAtl" compset="I1850CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="hcru_hcru" compset="I1850CRUCLM45BGC">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16" compset="I1850CRUCLM45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="hcru_hcru" compset="I1850SPINUPCLM45BGC">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f19_g16" compset="I1850SPINUPCN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="1x1_urbanc_alpha" compset="I1PT">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="1x1_urbanc_alpha" compset="I1PTCLM45">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="5x5_amazon" compset="I4804">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f19_g16" compset="I4804">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne30_g16" compset="I4804">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="5x5_amazon" compset="I4804CLM45">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne30_g16" compset="I4804CLM45">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="1x1_brazil" compset="ICLM45">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="1x1_camdenNJ" compset="ICLM45">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="1x1_camdenNJ" compset="ICNTEST">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f19_g16" compset="ICRUCLM45">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="hcru_hcru" compset="ICRUCLM45BGC">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="hcru_hcru" compset="ICRUCN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16_gl5" compset="IG">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16_gl5" compset="IG1850CLM45">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f19_g16_gl5" compset="IGCLM45">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16_gl10" compset="IGCLM45IS2">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="T31_g37_gl5" compset="IGHIST">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f19_g16_gl5" compset="IGHIST">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f19_g16_gl5" compset="IGHISTCLM45">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16_gl5" compset="IGHISTCLM45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16_gl5" compset="IGHISTCN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16_gl5" compset="IGRCP26CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16_gl5" compset="IGRCP45CLM45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f19_g16_gl5" compset="IGRCP45CLM45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16_gl5" compset="IGRCP45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f19_g16_gl5" compset="IGRCP45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16_gl5" compset="IGRCP60CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16_gl5" compset="IGRCP85CLM45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f19_g16_gl5" compset="IGRCP85CLM45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16_gl5" compset="IGRCP85CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f05_g16" compset="IHIST">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16" compset="IHIST">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f10_f10" compset="IHIST">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne16_g37" compset="IHIST">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne30_g16" compset="IHIST">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne60_g16" compset="IHIST">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16" compset="IHISTCLM45">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne120_g16" compset="IHISTCN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f19_g16" compset="IHISTCRUCLM45BGC">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16" compset="IRCP26CLM45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f05_g16" compset="IRCP26CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16" compset="IRCP26CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f19_g16" compset="IRCP26CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne120_g16" compset="IRCP26CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne30_g16" compset="IRCP26CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f05_g16" compset="IRCP45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16" compset="IRCP45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne120_g16" compset="IRCP45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne30_g16" compset="IRCP45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16" compset="IRCP60CLM45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f05_g16" compset="IRCP60CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16" compset="IRCP60CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f19_g16" compset="IRCP60CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne120_g16" compset="IRCP60CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne30_g16" compset="IRCP60CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16" compset="IRCP85CLM45BGC">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16" compset="IRCP85CLM45CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f05_g16" compset="IRCP85CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="f09_g16" compset="IRCP85CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne120_g16" compset="IRCP85CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="ne30_g16" compset="IRCP85CN">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="1x1_camdenNJ" compset="ITEST">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SBN" grid="5x5_amazon" compset="ITEST">
+    <machines>
+      <machine name="null" compiler="null" category="null">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS" grid="f10_f10" compset="IRCP45CN" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="hobart" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS" grid="f19_g16" compset="IRCP45CN">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld1" grid="1x1_mexicocityMEX" compset="I">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld1" grid="f19_g16" compset="I1850CLM45CN" testmods="clm/default">
+    <machines>
+      <machine name="goldbach" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld1" grid="1x1_vancouverCAN" compset="I1PTCLM45" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld1" grid="1x1_mexicocityMEX" compset="ICLM45" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld1" grid="1x1_vancouverCAN" compset="ICLM45" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld1" grid="5x5_amazon" compset="ITEST" testmods="clm/40default">
+    <machines>
+      <machine name="janus" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld1_Mmpi-serial" grid="1x1_vancouverCAN" compset="I1PTCLM45" testmods="clm/default">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld1_Mmpi-serial" grid="1x1_vancouverCAN" compset="I1PTCLM50" testmods="clm/default">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld1_Mmpi-serial" grid="f45_f45" compset="ICLM45" testmods="clm/ptsRLA">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld1_P24x1" grid="f10_f10" compset="ICLM45BGC" testmods="clm/oldhyd">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld1_P24x1" grid="f10_f10" compset="ICRUCLM45" testmods="clm/af_bias_v5">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld3" grid="f10_f10" compset="I1850CLM45BGC" testmods="clm/interp_f19_crop">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld3" grid="f10_f10" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm_short">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm_short">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm_short">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld3" grid="f10_f10" compset="ICLM45BGCCROP" testmods="clm/interp_f19_noncrop2crop">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld5" grid="1x1_mexicocityMEX" compset="I1PTCLM50" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ld5_Mmpi-serial" grid="5x5_amazon" compset="ICLM45ED" testmods="clm/edTest">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Lm1_Mmpi-serial" grid="CLM_USRDAT" compset="I1PTCLM45" testmods="clm/USUMB">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_D_Ly6" grid="1x1_smallvilleIA" compset="IHISTCLM45BGCCROP" testmods="clm/cropMonthOutput">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1" grid="f45_f45" compset="I" testmods="clm/ptsRLA">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="goldbach" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="goldbach" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="janus" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1" grid="f45_f45" compset="I" testmods="clm/ptsROA">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1" grid="f45_f45" compset="I" testmods="clm/ptsRLB">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1" grid="1x1_mexicocityMEX" compset="I1PT" testmods="clm/40default">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="janus" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1" grid="1x1_mexicocityMEX" compset="I1PTCLM45" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1" grid="f45_f45" compset="ICLM45" testmods="clm/ptsRLA">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1" grid="f45_f45" compset="ICLM45" testmods="clm/ptsRLB">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1" grid="f45_f45" compset="ICLM45" testmods="clm/ptsROA">
+    <machines>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1" grid="1x1_brazil" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_testsystem">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1" grid="f19_g16" compset="ICLM45CRUBGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1" grid="f19_g16" compset="ICLM45VIC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1" grid="1x1_numaIA" compset="ICNCROP" testmods="clm/40default">
+    <machines>
+      <machine name="edison" compiler="intel " category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="janus" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm40">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1" grid="f09_g16" compset="ICRUCLM45" testmods="clm/af_bias_v5">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1" grid="f19_g16" compset="ICRUCLM45BGC">
+    <machines>
+      <machine name="edison" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="hopper" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="janus" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld1_Mmpi-serial" grid="f45_f45" compset="ICLM45" testmods="clm/ptsRLA">
+    <machines>
+      <machine name="goldbach" compiler="nag" category="prealpha">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prealpha">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prealpha">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld2" grid="T31_g37" compset="IHIST">
+    <machines>
+      <machine name="goldbach" compiler="intel" category="prealpha">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld5" grid="f10_f10" compset="ICLM45ED" testmods="clm/edTest">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld5" grid="f19_g16" compset="ICLM45ED" testmods="clm/edTest">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld5" grid="f19_g16" compset="IRCP45CLM45BGC" testmods="clm/decStart">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld5" grid="f45_f45" compset="ITEST" testmods="clm/ptsROA">
+    <machines>
+      <machine name="edison" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="hopper" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="gnu" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld5" grid="f45_f45" compset="ITEST" testmods="clm/ptsRLB">
+    <machines>
+      <machine name="janus" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld5_D_P24x1" grid="f10_f10" compset="IRCP45CLM45BGC" testmods="clm/decStart">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ld5_P24x1" grid="f10_f10" compset="IRCP26CN" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="hobart" compiler="nag" category="aux_clm40">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Lm1_D" grid="f10_f10" compset="ICLM45BGC" testmods="clm/snowlayers_3_monthly">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Lm25" grid="f19_g16" compset="ICLM45BGCCROP" testmods="clm/cropMonthOutput">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Lm37" grid="T31_g37_gl5" compset="IG1850CLM45" testmods="clm/glcMEC_long">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ly1" grid="f19_g16" compset="ICLM45BGCCROP" testmods="clm/monthly">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_intel">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ly3" grid="1x1_numaIA" compset="ICLM45BGCDVCROP" testmods="clm/cropMonthOutput">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ly3" grid="1x1_tropicAtl" compset="IHISTCLM45BGC" testmods="clm/tropicAtl_subsetLate">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ly5" grid="1x1_tropicAtl" compset="IHISTCLM45BGC" testmods="clm/tropicAtl_subsetMid">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_Ly8" grid="1x1_tropicAtl" compset="IHISTCLM45BGC" testmods="clm/tropicAtl_subsetEarly">
+    <machines>
+      <machine name="yellowstone" compiler="gnu" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SMS_P5x1_Ln48" grid="5x5_amazon" compset="ICLM45" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_scripts">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SSP_D_Ld10" grid="f19_g16" compset="I1850CLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_clm45">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SSP_Ld10" grid="f19_g16" compset="I1850CLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="edison" compiler="intel" category="aux_clm_ys_pgi">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="aux_clm45">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+      <machine name="yellowstone" compiler="pgi" category="prebeta">
+        <options>
+          <option name="wallclock">4:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SSP_Ld10" grid="f19_g16" compset="I1850CLM45BGC" testmods="clm/reduceOutput">
+    <machines>
+      <machine name="goldbach" compiler="intel" category="prebeta">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+  <test name="SSP_Ld10" grid="f10_f10" compset="ICLM45BGC" testmods="clm/default">
+    <machines>
+      <machine name="yellowstone" compiler="intel" category="aux_scripts">
+        <options>
+          <option name="wallclock">2:00</option>
+          <option name="pecount">L</option>
+        </options>
+      </machine>
+    </machines>
+  </test>
+</testlist>
