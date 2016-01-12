@@ -68,14 +68,14 @@ sub findTests() : Test(3)
     }
 }
 
-sub findTestsForComp() : Test(3)
+sub findTestsForFile() : Test(3)
 {
     my $self = shift;
     
     my $testlists = Testing::TestLists->new(cimeroot => "./t/mocks_TestLists/mockcimeroot");
     
     my %params = ( machine => 'yellowstone' );
-    my @cimetestlist = $testlists->findTestsForComp('allactive', \%params);
+    my @cimetestlist = $testlists->findTestsForFile($testlists->{allactive}, \%params);
     foreach my $ct(@cimetestlist)
     {
         ok($ct->{machine} eq 'yellowstone');
@@ -83,7 +83,7 @@ sub findTestsForComp() : Test(3)
 
 
     %params = ( compset => 'B1850', machine => 'yellowstone', compiler => 'intel');
-    @cimetestlist = $testlists->findTestsForComp('allactive', \%params);
+    @cimetestlist = $testlists->findTestsForFile($testlists->{allactive}, \%params);
     foreach my $ct(@cimetestlist)
     {
         ok($ct->{compset} eq 'B1850');
@@ -91,20 +91,20 @@ sub findTestsForComp() : Test(3)
         ok($ct->{compiler} eq 'intel');
     }
     %params = (  machine => 'yellowstone', compiler => 'intel');
-    @cimetestlist = $testlists->findTestsForComp('allactive', \%params);
+    @cimetestlist = $testlists->findTestsForFile($testlists->{allactive}, \%params);
     foreach my $ct(@cimetestlist)
     {
         ok($ct->{machine} eq 'yellowstone');
         ok($ct->{compiler} eq 'intel');
     }
     %params = (  category => 'prebeta');
-    @cimetestlist = $testlists->findTestsForComp('allactive', \%params);
+    @cimetestlist = $testlists->findTestsForFile($testlists->{allactive}, \%params);
     foreach my $ct(@cimetestlist)
     {
         ok($ct->{category} eq 'prebeta');
     }
     %params = ();
-    @cimetestlists = $testlists->findTestsForComp('allactive', \%params);
+    @cimetestlists = $testlists->findTestsForFile($testlists->{allactive}, \%params);
 }
 
 1;

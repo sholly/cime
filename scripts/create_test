@@ -361,6 +361,8 @@ sub initialize()
     require ConfigCase;
     require ConfigMachine;
     require Log::Log4perl;
+    require Testing::CIMETest;
+    require Testing::TestLists;
     #Set defaults for the command-line options
 
     %opts = (
@@ -855,6 +857,11 @@ sub ExpandXmlList
     my $testmach = shift;
     my $testcategory = shift;
     my $testcompiler = shift;
+    my %queryparams;
+    $queryparams{'machine'} = $testmach;
+    $queryparams{'compiler'} =  $testcompiler;
+    $queryparams{'category'} = $testcategory;
+    
 
     $logger->debug( "testlist file  $testlistfile\n");
     my $cwd = getcwd();
@@ -865,74 +872,12 @@ sub ExpandXmlList
 
     my @actualtests;
 
-    my $parser = XML::LibXML->new( no_blanks => 1);
-    my $file = $testlistfile;
-    my $xml = $parser->parse_file($file);
-
-    my @compset_elems = $xml->findnodes(".//compset");
-    foreach my $compset_elem (@compset_elems) {
-	my $compset_val = $compset_elem->getAttribute('name');
-
-	my @grid_elems = $compset_elem->findnodes(".//grid");
-	foreach my $grid_elem (@grid_elems) {
-	    my $grid_val  = $grid_elem->getAttribute('name');
-
-	    my @test_elems = $grid_elem->findnodes(".//test");
-	    foreach my $test_elem (@test_elems) {
-		my $test_val  = $test_elem->getAttribute('name');
-		if ($opts{'nlcompareonly'}) {
-		    # Replace the test type with SBN
-		    $test_val = "SBN";
-		    my $optidx = index( $test_val, "_" );
-		    if ( $optidx >= 0 ) {
-			$test_val .= substr( $test_val, $optidx );
-		    }
-		}
-
-		my @mach_elems = $test_elem->findnodes(".//machine");
-		foreach my $mach_elem (@mach_elems) {
-		    my $machine_val  = $mach_elem->textContent();
-		    my $testtype_val = $mach_elem->getAttribute('testtype');
-		    my $compiler_val = $mach_elem->getAttribute('compiler');
-		    my $testmods_val = $mach_elem->getAttribute('testmods');
-		    $testmods_val =~ s/\//-/g if(defined $testmods_val);
-		    my $testname = "$test_val" . ".$grid_val" . ".$compset_val." ;
-
-		    if ($testcategory eq "all" or $testtype_val =~ /^${testcategory}$/) 
-		    {
-			if ($testmach eq "all" or $machine_val eq $testmach )
-			{
-			    if($testmach eq "all"){
-				if ($opts{'mach'}){
-				    $testname .= $opts{'mach'};
-				}else{
-				    $testname .= "yellowstone";
-				}
-			    }else{
-				$testname .= $machine_val;
-			    }
-			    if ($testcompiler eq "all" or $compiler_val =~ /^${testcompiler}$/)
-			    {
-				if($testcompiler eq "all"){
-				    if ($opts{'compiler'}){
-					$testname .="_".$opts{'compiler'};
-				    }else{
-					$testname .="_intel";
-				    }
-				} else{
-				    $testname .= "_".$compiler_val;
-				}
-				if ($testmods_val) {
-				    $testname = "$testname" . ".$testmods_val";
-				}
-				push (@actualtests, $testname);
-				$logger->debug("testname is $testname \n");
-			    }
-			}
-		    }
-		}
-	    }
-	}
+    my $testlistparser = Testing::TestLists->new($cimeroot);
+    my @cimetestobjects  = $testlistparser->findTestsForFile($testlistfile, \%queryparams);
+    foreach my $cimetestobj(@cimetestobjects)
+    {
+        my $test = $cimetestobj->textFormat();
+        push(@actualtests, $test);
     }
     return @actualtests;
 }  
@@ -1907,7 +1852,7 @@ sub main
 		my $file = $xml_testlist_files{$key};
 		my @complist; 
 		@complist = ExpandXmlList( $file, $opts{'xml_mach'}, $opts{'xml_category'}, $opts{'xml_compiler'});
-		push (@actualtests, @complist) 
+		push (@actualtests, @complist);
 	    }
             # check for duplicates in the test list...
             my %seen = ();

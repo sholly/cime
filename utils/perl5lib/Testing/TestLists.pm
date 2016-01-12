@@ -37,6 +37,7 @@ sub new
     # TODO Jim's refactor will make this easier, for now, implement 
     # such that all we are concerned about is CESM. 
     $self->{allactive} = $self->{cimeroot} . "/cime_config/cesm/allactive/testlist_allactive.xml";
+    $self->{drv} = $self->{cimeroot} . "/driver_cpl/cime_config/testdefs/testlist_drv.xml";
     $self->{cam} = $self->{cimeroot} . "/../components/cam/cime_config/testdefs/testlist_cam.xml";
     $self->{cice} = $self->{cimeroot} . "/../components/cice/cime_config/testdefs/testlist_cice.xml";
     $self->{cism} = $self->{cimeroot} . "/../components/cism/cime_config/testdefs/testlist_cism.xml";
@@ -65,7 +66,8 @@ sub findTests()
     {
         foreach my $comp (@{$self->{components}})
         {
-            my @comptests = $self->findTestsForComp($comp, $params);
+            my $filetoquery = $self->{$comp};
+            my @comptests = $self->findTestsForFile($filetoquery, $params);
             push(@tests, @comptests);
         }
     }
@@ -79,20 +81,20 @@ sub findTests()
 # # TODO: CIMETest is really a bad name for what are simple little data storage objects, 
 # perhaps a better name is appropriate? 
 #-----------------------------------------------------------------------------------------------
-sub findTestsForComp()
+sub findTestsForFile()
 {
     my $self = shift;
-    my $comp = shift;
+    my $filetoquery = shift;
+    #print "filetoquery: $filetoquery\n";
     my $params = shift;
     
-    my $filetoquery = $self->{$comp};
     my @cimetestlist;
 
     # The beginning of the XPATH query, we always want to search for '/testlist/test'
     my $query = "/testlist/test";
     # 
     # compset or testmods, add attribute search query options to the query. 
-    my %outerfields = ( testname => 'name', grid => 'grid', compset => 'compset', 
+    my %outerfields = ( test => 'name', grid => 'grid', compset => 'compset', 
                         testmods => 'testmods');
     my %innerfields = ( machine => 'name', compiler => 'compiler', category => 'category');
 
@@ -200,20 +202,26 @@ sub findTestsForComp()
   
     foreach my $machnode(@machnodes)
        {
-           # construct the cimetest at this level, we can get the
-           # test node from the machine node, using the parent of the parent
-           #
-           my $cimetest = Testing::CIMETest->new();
-           my $grandparent = $machnode->parentNode->parentNode;
-           $cimetest->{testname} = $grandparent->getAttribute('name');
-           $cimetest->{compset} = $grandparent->getAttribute('compset');
-           $cimetest->{grid} = $grandparent->getAttribute('grid');
-           my $mods = $grandparent->getAttribute('testmods');
-           $cimetest->{testmods} = $mods if(defined $mods);
-           $cimetest->{machine} = $machnode->getAttribute('name');
-           $cimetest->{compiler} = $machnode->getAttribute('compiler');
-           $cimetest->{category} = $machnode->getAttribute('category');
-           push(@cimetestlist, $cimetest);
+            # construct the cimetest at this level, we can get the
+            # test node from the machine node, using the parent of the parent
+            #
+            my $cimetest = Testing::CIMETest->new();
+            my $grandparent = $machnode->parentNode->parentNode;
+            $cimetest->{testname} = $grandparent->getAttribute('name');
+            $cimetest->{compset} = $grandparent->getAttribute('compset');
+            $cimetest->{grid} = $grandparent->getAttribute('grid');
+            my $mods = $grandparent->getAttribute('testmods');
+            $cimetest->{testmods} = $mods if(defined $mods);
+            $cimetest->{machine} = $machnode->getAttribute('name');
+            $cimetest->{compiler} = $machnode->getAttribute('compiler');
+            $cimetest->{category} = $machnode->getAttribute('category');
+             
+            my @optnodes = $machnode->findnodes('./options/option');
+            foreach my $optnode(@optnodes)
+            {
+                $cimetest->addOption($optnode->getAttribute('name'), $optnode->textContent);
+            }
+            push(@cimetestlist, $cimetest);
        }
 
     return @cimetestlist;

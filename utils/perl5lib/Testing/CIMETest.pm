@@ -48,4 +48,22 @@ sub getOption()
         return undef;
     }
 }
+
+sub textFormat()
+{
+    my $self = shift;
+    my $text = $self->{testname} . "." . $self->{grid} . ".";
+    $text   .= $self->{compset} . "." . $self->{machine};
+    $text   .= "_" . $self->{compiler}; 
+    if(defined $self->{testmods})
+    {
+        $self->{testmods} =~ s/\//_/g;
+        $text .= "." . $self->{testmods};
+    }
+    if(defined $self->{comment})
+    {
+        $text .= "# " . $self->{comment};
+    }
+    return $text;
+}
 1;

@@ -143,6 +143,10 @@ sub translate_testlist()
         {
             $testelement->setAttribute('testmods', $test->{testmods});
         }
+        if(defined $test->{comment})
+        {
+            $testelement->setAttribute('comment', $test->{comment});
+        }
         my $machineselement = XML::LibXML::Element->new('machines');
         my $machineelement = XML::LibXML::Element->new('machine');
         $machineelement->setAttribute('name', $test->{machine});
@@ -235,6 +239,7 @@ sub main()
 {
     my @origfilepaths = (
                            "../cime_config/cesm/allactive/testlist_allactive.xml",
+                           "../driver_cpl/cime_config/testdefs/testlist_drv.xml",
                            "../../components/rtm/cime_config/testdefs/testlist_rtm.xml",
                            "../../components/clm/cime_config/testdefs/testlist_clm.xml",
                            "../../components/cice/cime_config/testdefs/testlist_cice.xml",
