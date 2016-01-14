@@ -688,12 +688,14 @@ sub checkOptions
     # This is a hack to get the machine name out of the text test list 
     elsif(defined $opts{'input_list'} )
     {
+    $logger->debug("ExpandTestList to get machine...");
 	my @testlist = ExpandTestList($opts{'input_list'});
-	my $firsttest = $testlist[0];
-	my $testhash = ParseTestName($firsttest);
+    #$logger->debug( eval { Dumper \@testlist});
+	my $firsttestobj = $testlist[0];
+	#my $testhash = ParseTestName($firsttest);
 	$logger->debug("first test: ");
-	$logger->debug( eval { Dumper $testhash });
-	my $machine = $testhash->{'mach'};
+	$logger->debug( eval { Dumper $firsttestobj });
+	my $machine = $firsttestobj->{'mach'};
 	$opts{'guessmach'} = $machine;
 	$logger->debug("opts{'guessmach'} = $opts{'guessmach'}");
     }
@@ -1418,6 +1420,7 @@ sub ExpandTestList
     $fh->open("< $testlistfile") or $logger->logdie( "ERROR: $testlistfile doesn't exist");
     my @potentialtests = <$fh>;
     chomp @potentialtests;
+    print Dumper \@potentialtests;
     close $fh;
     # Filter out comments..
     for my $i (0 .. $#potentialtests)
@@ -1474,7 +1477,41 @@ sub ExpandTestList
 
     $logger->debug("finished with ExpandTestList");
     # Return the sorted list of tests
-    return sort @nodupes;
+    my @testobjects; 
+    foreach my $test(@nodupes)
+    {
+        $logger->debug("test $test");
+        my $hash = ParseTestName($test);
+        $logger->debug("hash after test: ");
+        $logger->debug( eval { Dumper $hash } );
+        my $cimetestobject = Testing::CIMETest->new();
+        $cimetestobject->{compset} = $hash->{'compset'};
+        $cimetestobject->{grid} = $hash->{'grid'};
+        $cimetestobject->{testname} = $hash->{'testname'};
+        $cimetestobject->{compiler} = $hash->{'compiler'};
+        if(defined $hash->{mach})
+        {
+            $cimetestobject->{machine} = $hash->{mach};
+        }
+        
+        if(defined $hash->{'testmods'})
+        {
+            $cimetestobject->{testmods} = $hash->{'testmods'};
+        }
+        if(defined $hash->{'comment'})
+        {
+            $cimetestobject->{comment} = $hash->{'comment'};
+        }
+        foreach my $key(keys %{$hash})
+        {
+            $cimetestobject->setExtraValue($key, $$hash{$key});
+        }
+        print Dumper $cimetestobject;
+        push(@testobjects, $cimetestobject);
+    }
+    #print Dumper \@testobjects;
+    return @testobjects; 
+    
 }
 
 #-----------------------------------------------------------------------------------------------
@@ -1802,24 +1839,30 @@ sub namelistCompare
 #-----------------------------------------------------------------------------------------------
 sub doonetest{
     my ($testname) = @_;
-    my $testhash;
+    my $testobj;
 
-    $testhash = ParseTestName($testname);
-    $logger->debug("testhash after ParseTestName: ");
-	$logger->debug( eval {Dumper $testhash});
+    #$testhash = ParseTestName($testname);
+    $logger->debug("testhash after ParseTestName not called : ");
+	$logger->debug( eval {Dumper $testobj});
 
-    checkTestCase($testhash);
-    documentTestCase($testhash);
-    my $rc = runCreateNewcase($testhash);
+    checkTestCase($testobj);
+    $logger->debug("testhash after checkTestCase ");
+	$logger->debug( eval {Dumper $testobj});
+    documentTestCase($testobj);
+    $logger->debug("testhash after documentTestCase ");
+	$logger->debug( eval {Dumper $testobj});
+    my $rc = runCreateNewcase($testobj);
+    $logger->debug("testhash after runCreateNewCase ");
+	$logger->debug( eval {Dumper $testobj});
 
     if($rc==0 && ! $opts{'dryrun'}){
-	writeEnvTestXML($testhash);
-	testcaseSetup($testhash);
-	$logger->debug( eval {  Dumper $testhash} );
+	writeEnvTestXML($testobj);
+	testcaseSetup($testobj);
+	$logger->debug( eval {  Dumper $testobj} );
     }
 
 
-    return $testhash;
+    return $testobj;
 }
 
 #-----------------------------------------------------------------------------------------------
@@ -1847,33 +1890,40 @@ sub main
 	my @testspec;
 
 	if($xmlmode){
-            my @actualtests;
+        my @actualtestobjects;
 	    foreach my $key (keys %xml_testlist_files) {
-		my $file = $xml_testlist_files{$key};
-		my @complist; 
-		@complist = ExpandXmlList( $file, $opts{'xml_mach'}, $opts{'xml_category'}, $opts{'xml_compiler'});
-		push (@actualtests, @complist);
+		    my $file = $xml_testlist_files{$key};
+		    #my @complist; 
+		    my @compcimetestobjects; 
+		    my @compcimetestobjects = ExpandXmlList( $file, $opts{'xml_mach'}, $opts{'xml_category'}, $opts{'xml_compiler'});
+		    push (@actualtestobjects, @compcimetestobjects);
 	    }
             # check for duplicates in the test list...
-            my %seen = ();
-            $seen{$_}++ for @actualtests;
-            my @nodupes = keys %seen;
-            my $testlistsize = @nodupes;
+            #my %seen = ();
+            #$seen{$_}++ for @actualtests;
+            #my @nodupes = keys %seen;
+            #my $testlistsize = @nodupes;
+            my $testlistsize = @actualtestobjects;
             $logger->debug("test list size: $testlistsize");
             if($testlistsize == 0)
             {
 		$logger->logdie("No tests could be found with the test options given:
 		       xml_mach: $opts{'xml_mach'}, xml_compiler: $opts{'xml_compiler'}, xml_category: $opts{'xml_category'}");
             }
-            @testlist = @nodupes;
+            #@testlist = @nodupes;
+            @testlist = @actualtestobjects;
 	    
 	}else{
 	    checkTestSuiteOptions();
 	    @testlist = ExpandTestList($opts{'input_list'});
 	}
-	foreach my $testname (@testlist)
+	#foreach my $testname (@testlist)
+	#{
+	#    push(@testspec, doonetest($testname));
+	#}
+	foreach my $testobj (@testlist)
 	{
-	    push(@testspec, doonetest($testname));
+	    push(@testspec, doonetest($testobj));
 	}
 	my $testspecfilename = writeTestListXML(\@testspec); 
 	if($opts{'compare'} or $opts{'generate'}){

@@ -20,6 +20,18 @@ sub new
     return $self;
 }
 
+sub setExtraValue()
+{
+    my $self = shift;
+    my $name = shift;
+    my $value = shift;
+    
+    if(! defined $self->{$name})
+    {
+        $self->{$name} = $value;
+    }
+}
+
 sub setTestMods()
 {
     my $self = shift;

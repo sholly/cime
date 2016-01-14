@@ -215,7 +215,6 @@ require ConfigTests;
 require SetupTools;
 require Project::ProjectTools;
 require UserMods::UserModsTools;
-require Testing::TestLists; 
 require Module::ModuleLoader;
 require Log::Log4perl;
 
@@ -526,8 +525,6 @@ if ( $opts{'compset'} ) {
    my %case;
    $case{'compset'} = $opts{'compset'};
    $case{'grid'}    = $opts{'res'};
-   #   my $testlistobj = Testing::TestLists->new(scriptsdir => $cfgdir); TODO
-   #   $testsforcase = $testlistobj->findTestsForCase(\%case); TODO
 } else {
     my $compset = $config->get('COMPSET');
     $testsforcase = "WARNING!:: Compset  $compset is NOT a tested configuration.\n" ;
